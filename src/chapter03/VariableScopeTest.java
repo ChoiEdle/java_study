@@ -26,7 +26,7 @@ public class VariableScopeTest {
 			System.out.println("지역변수 : " + number2);	//블럭 밖에선 안됨
 			System.out.println("지역변수 : " + str2);
 		}
-		int number2 = 50;	//블럭이 끝난 후라 number2는 삭제 되었기에 새로 입력 할 수 있음
+		int number2 = 50;	//블럭이 끝난 후라 number2는 삭제 되었기에 새로 선언 할 수 있음
 		
 		System.out.println("전역변수 : " + gnumber);
 		System.out.println("전역상수 : " + START);
@@ -34,6 +34,7 @@ public class VariableScopeTest {
 		System.out.println("지역변수 : " + number);
 		System.out.println("참조변수 : " + str);
 		System.out.println("참조변수 : " + str2);
+		System.out.println("지역변수 : " + number2);
 	}
 
 }

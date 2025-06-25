@@ -20,6 +20,7 @@ public class ScannerTest {
 		System.out.println("나이 : " + age);
 		System.out.println("과목 : " + subject);
 		
+		scan.close();
 	}
 
 }

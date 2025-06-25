@@ -47,6 +47,7 @@ public class PrimitiveDataTypeTest {
 		System.out.println("char acscii : " + c_asc2);	//65
 		System.out.println("START : " + START);
 		System.out.println("END : " + END);
+		System.out.println("char : " + str);
 	}
 
 }

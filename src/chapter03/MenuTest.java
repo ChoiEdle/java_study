@@ -22,7 +22,7 @@ public class MenuTest {
 		
 		
 		
-		
+		scan.close();
 	}
 
 }

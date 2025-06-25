@@ -15,7 +15,7 @@ public class ReferenceDataType {
 		
 		System.out.println(name);
 		System.out.println(name2);
-		System.out.println(name == name2);		//false 나옴
+		System.out.println(name == name2);		//false 나옴, name은 Heap에 있는 "홍길동"의 주소, name2는 "홍길동"
 		System.out.println(scan);
 		
 	}

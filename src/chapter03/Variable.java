@@ -13,7 +13,7 @@ public class Variable {
 		String sname = "김길동";					//기본형(Stack에 저장됨)
 		
 		// 참조 자료 변수 정의
-		String sname2 = new String("이길동");		//참조형(Heap에 저장됨)		
+		String sname2 = new String("고길동");		//참조형(Heap에 저장됨, Stack에는 Heap의 주소만 저장됨)	
 		// ** String 클래스는 기본형과 참조형으로 모두 사용 가능!!
 				
 		//출력
@@ -25,7 +25,7 @@ public class Variable {
 		System.out.println(name3);
 		System.out.println(sname);
 		System.out.println(sname2);
-
+		System.out.println(""+ name + name2 + name3);	//"" 빼면 값이 아스키코드 값의 합이 나옴
 	}
 
 }
