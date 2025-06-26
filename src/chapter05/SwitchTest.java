@@ -19,10 +19,10 @@ public class SwitchTest {
 
 	public static void main(String[] args) {
 		//프로그램 실행시 정수값을 입력받아 결과를 출력하시오
-		//입력값이 1이면 사과🍎
-		//입력값이 2이면 오렌지🍊		
-		//입력값이 3이면 망고🥭
-		//입력값이 4이면 키위🥝
+		//입력값이 1이면 사과(🍎)
+		//입력값이 2이면 오렌지(🍊)		
+		//입력값이 3이면 망고(🥭)
+		//입력값이 4이면 키위(🥝)
 		//그외의 숫자는 '준비중입니다' 메세지 출력
 		Scanner scan = new Scanner(System.in);
 		int number = -1;	//0도 입력받을예정이라 -1로(정수는 0부터니깐)
@@ -31,23 +31,21 @@ public class SwitchTest {
 		
 		switch (number) {
 			case 1:
-				System.out.println("🍎");
-				break;
+				System.out.println("사과(🍎)");
+				break;							//break가 없으면 break가 나올때까지 순차적으로 출력
 			case 2:
-				System.out.println("🍊");
+				System.out.println("오렌지(🍊)");
 				break;
 			case 3:
-				System.out.println("🥭");
+				System.out.println("망고(🥭)");
 				break;
 			case 4:
-				System.out.println("🥝");
+				System.out.println("키위(🥝)");
 				break;
 			default :
 				System.out.println("준비중입니다.");
-		
 		}
-		
-//		System.out.println(number);
+		System.out.println("-- 종료 --");
 		
 		
 		
