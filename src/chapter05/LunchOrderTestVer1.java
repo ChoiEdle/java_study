@@ -17,6 +17,9 @@ public class LunchOrderTestVer1 {
 		int menuNo = -1;
 		String menuName = " ";
 		int menuPrice = 0;
+		int charge = 0;		//얘와 얘 밑에는 2. 주문 결제에서 선언 했었지만 중간에 선언 해주는 것은 좋지 않음
+		int change = 0;
+
 		
 		//1. 메뉴 선택
 		System.out.print("메뉴 선택(숫자로) > ");
@@ -57,9 +60,22 @@ public class LunchOrderTestVer1 {
 		
 		//2. 주문 결제
 		
+		System.out.print("결제할 요금 입력 > ");
+		
+		if(scan.hasNextInt()) {
+			charge = scan.nextInt();
+			if(charge >= menuPrice) {
+				change = charge - menuPrice;
+			}else {
+				System.out.println("요금이 부족합니다. 다시 입력해 주세요");
+			}
+		} else {
+			System.out.println("올바르지 않은 입력값입니다.");
+		}	//if(scan.hasNextInt())
+		
 		
 		//3. 주문 내역 출력 : 주문한 메뉴는 (햄버거), 결제금액(), 잔돈() 입니다.
-		
+		System.out.println("주문한 메뉴는 " + menuName + ", 결제금액은 " + menuPrice + "원, 잔돈은 " + change + "원 입니다.");
 		
 		scan.close();
 		}
