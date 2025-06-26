@@ -35,9 +35,11 @@ public class LotteWorldTest {
 //		((6세 이상 키가 120 이상) || (6세 이하 키가 120 이상 보호자o)) && (심장질환)
 		String result = (((age >= 6) && (height >=120)) || ((age < 6) && (height >= 120) &&(parent == true))) && (dease == false)? "탑승 가능!!" : " 탑승 불가능!!";
 
-		System.out.println("result : " + result);
+		System.out.println(name + " result : " + result);
 	
 	
+		
+		input.close();
 	}
 
 }

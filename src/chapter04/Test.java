@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class Test {
 
 	public static void main(String[] args) {
+		//LotteWorldTest 사전에 혼자 해본 작업물
+		
 		Scanner input = new Scanner(System.in);
 		int age = input.nextInt();
 		int hight = input.nextInt();
@@ -18,6 +20,8 @@ public class Test {
 		System.out.println("result : " + result);
 	
 		
+		
+		input.close();
 	}
 
 }
