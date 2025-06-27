@@ -63,7 +63,8 @@ public class DrinkOrderTestVer1 {
 					System.out.println("=> 금액이 부족합니다. 다시 입력해주세요.");					
 				}
 			}else {
-				System.out.println("올바르지 않은 입력값 입니다. 다시 입력해주세요");		
+				System.out.println("올바르지 않은 입력값 입니다. 다시 입력해주세요");
+				scan.next();
 			}
 		}//while
 		System.out.println("=> 결제 완료! 잔돈: " + charge + "원");				
