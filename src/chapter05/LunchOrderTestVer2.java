@@ -32,6 +32,7 @@ public class LunchOrderTestVer2 {
 			System.out.print("메뉴 선택(숫자로) > ");
 			if(scan.hasNextInt()){
 				menuNo = scan.nextInt();
+				menuFlag = false;
 				
 				switch(menuNo) {
 				case 1:	menuName = "햄버거(🍔)"; 	menuPrice = 100;	break;
@@ -43,8 +44,8 @@ public class LunchOrderTestVer2 {
 					System.exit(0);
 					break;
 				default : System.out.println("메뉴 준비중 입니다.");
+				menuFlag = true;
 				}//switch		 
-				menuFlag = false;
 			} else{
 				System.out.println("올바르지 않은 입력값입니다. 다시 입력해주세요");
 				scan.next();	//작업의 끝을 위해서 scan값을 초기화
