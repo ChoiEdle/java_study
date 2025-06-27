@@ -24,7 +24,6 @@ public class GugudanVer1 {
 				System.out.println("구구단을 종료합니다.");
 //				System.exit(0);		//나는 여기에 종료 명령어 말고 boolean값의 true를 갖는 변수로 선언해서 while조건식에 넣고 여기서 false로 변경하는 방식을 생각함
 			}
-			scan.close();
 		}//whhile
 		
 		
