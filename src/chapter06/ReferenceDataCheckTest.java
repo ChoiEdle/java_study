@@ -11,10 +11,14 @@ public class ReferenceDataCheckTest {
 		//기본형
 		int a = 10;
 		int b = 10;
-		String str1 = "홍길동";
-		String str2 = "홍길동";
+		String str1 = "홍길동은 자바천재";
+		String str2 = "홍길동은 자바천재";
+		String str3 = "홍길순은 자바천재";
 		
 		// call by value 형태로 값을 비교
+		System.out.println(System.identityHashCode(str1));
+		System.out.println(System.identityHashCode(str2));
+		System.out.println(System.identityHashCode(str3));
 		System.out.println("a == b : " + (a==b));	
 		System.out.println("str1 == str2 : " + (str1==str2));	
 		
