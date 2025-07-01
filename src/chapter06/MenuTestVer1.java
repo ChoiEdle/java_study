@@ -123,7 +123,6 @@ public class MenuTestVer1 {
 		
 		
 		
-		
 	}//main
 
 }
