@@ -3,9 +3,9 @@ package chapter06;
 import java.util.Scanner;
 
 /*
- * ScoreTestVer2의 결과에 메뉴를 추가함
+ * ScoreTestVer3의 점수 저장을 2차원 배열 구조로 수정함
  */
-public class ScoreTestVer3 {
+public class ScoreTestVer4 {
 
 	public static void main(String[] args) {
 		
@@ -17,11 +17,7 @@ public class ScoreTestVer3 {
 		
 		
 		String[] nameList = new String[MAX_SIZE];
-		int[] korList = new int[MAX_SIZE];
-		int[] engList = new int[MAX_SIZE];
-		int[] mathList = new int[MAX_SIZE];
-		int[] totList = new int[MAX_SIZE];
-		int[] avgList = new int[MAX_SIZE];
+		int[][] scoreList = new int[MAX_SIZE][];
 		
 		int count = 0;	//등록된 학생수 저장
 		
@@ -39,17 +35,26 @@ public class ScoreTestVer3 {
 			
 			if(menu == 1) {			//학생 등록
 				for(int i=count; i<nameList.length; i++) {
+					String[] subjectList = {"국어", "영어", "수학"};
 					System.out.print("학생명 > ");
 					nameList[i] = scan.next();
-					System.out.print("국어 > ");
-					korList[i] = scan.nextInt();
-					System.out.print("영어 > ");
-					engList[i] = scan.nextInt();
-					System.out.print("수학 > ");
-					mathList[i] = scan.nextInt();
-
-					totList[i] = korList[i]+engList[i]+mathList[i];		//총점
-					avgList[i] = totList[i]/3;							//평균
+					
+					//학생의 점수를 입력할 배열을 생성
+					scoreList[i] = new int[5];
+					int tot = 0;
+					int avg = 0;
+					
+					for(int j=0; j<subjectList.length; j++) {
+						System.out.print(subjectList[j] + " > ");
+						scoreList[i][j]=scan.nextInt();
+						tot += scoreList[i][j];
+						avg = tot/subjectList.length;
+					}
+					
+					
+					scoreList[i][scoreList[i].length-2] = tot;		//총점
+					scoreList[i][scoreList[i].length-1] = avg;		//총점
+				
 					count++;
 					
 					System.out.print("계속 입력 하시겠습니까(계속:아무키나누르세요, 종료:n)?");
@@ -63,16 +68,13 @@ public class ScoreTestVer3 {
 					System.out.println("-------------------------------------------------");
 					System.out.println("이름\t국어\t영어\t수학\t총점\t평균");
 					System.out.println("-------------------------------------------------");
-					for(int i=0; i<nameList.length; i++) {
+					for(int i=0; i<count; i++) {
 						//이름이 null이 아닌 경우에만 출력
-						if(nameList[i]!=null) {				//여기서 null은 주소값이 없는 경우, 그러므로 !=를 사용
-							System.out.print(nameList[i] + "\t");
-							System.out.print(korList[i] + "\t");
-							System.out.print(engList[i] + "\t");
-							System.out.print(mathList[i] + "\t");
-							System.out.print(totList[i] + "\t");
-							System.out.print(avgList[i] + "\n");
+						System.out.print(nameList[i] + "\t");
+						for(int j=0; j<scoreList[i].length; j++) {
+							System.out.print(scoreList[i][j] + "\t");
 						}
+						System.out.println();
 					}
 					System.out.println("-------------------------------------------------");					
 				} else {
@@ -109,11 +111,10 @@ public class ScoreTestVer3 {
 							System.out.println("이름\t국어\t영어\t수학\t총점\t평균");
 							System.out.println("-------------------------------------------------");
 							System.out.print(nameList[searchIdx] + "\t");
-							System.out.print(korList[searchIdx] + "\t");
-							System.out.print(engList[searchIdx] + "\t");
-							System.out.print(mathList[searchIdx] + "\t");
-							System.out.print(totList[searchIdx] + "\t");
-							System.out.print(avgList[searchIdx] + "\n");
+							for(int score : scoreList[searchIdx]) {
+								System.out.print(score + "\t");
+							}
+							System.out.println();
 							System.out.println("-------------------------------------------------");
 							
 							System.out.print("계속 검색 하시겠습니까(계속:아무키나누르세요, 종료:n)?");
