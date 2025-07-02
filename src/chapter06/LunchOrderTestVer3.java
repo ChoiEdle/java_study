@@ -32,8 +32,8 @@ public class LunchOrderTestVer3 {
 		int count = 0;
 		
 		//결제 리스트 선언 및 생성
-		String[] paymentNameList = new String[10];
-		int[][] paymentPriceList = new int[10][3];
+		String[] paymentNameList = new String[10];	//여기서 10은 결제 리스트에 저장 될 수 있는 최대 숫자
+		int[][] paymentPriceList = new int[10][3];	//여기서 3은 가격, 입금액, 잔돈 이렇게 3개
 		int paymentCount = 0;
 				
 		System.out.println("*******************************************");
@@ -93,7 +93,7 @@ public class LunchOrderTestVer3 {
 //							}//switch
 							
 							//주문 갯수 체크
-							if(count == MAX_SIZE) {
+							if(count == MAX_SIZE) {		//사실 이걸 위로 옮겨야 count값이 MAX_SIZE값이 되었을 때 메뉴에서 다시 주문으로 못 들어옴
 								System.out.println("=> 주문은 최대 " + MAX_SIZE + "개까지 가능!!!!!");
 								orderFlag = false;
 							} else {
@@ -158,7 +158,7 @@ public class LunchOrderTestVer3 {
 					}//while
 					
 					//paymentNameList, paymentPriceList에 값 넣기
-					paymentNameList[paymentCount] = orderMenuList[0] + "등..";	//결제 내역 리스트에 첫번째 메뉴 넣고
+					paymentNameList[paymentCount] = orderMenuList[0] + "등..";	//결제 내역 리스트에 첫번째 메뉴 + 등..
 					paymentPriceList[paymentCount][0] = totalPayment;			//첫번째 위치에 결제 예정 금액
 					paymentPriceList[paymentCount][1] = charge;					//두번째 위치에 결제 금액
 					paymentPriceList[paymentCount][2] = change;					//세번째 위치에 잔돈
