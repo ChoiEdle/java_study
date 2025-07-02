@@ -23,6 +23,7 @@ public class LunchOrderTestVer3 {
 		//주문 음식 리스트
 		String[] menuList = {"햄버거(🍔)", "피  자(🍕)", "라  멘(🍜)", "샐러드(🥗)"};
 		int[] priceList = {100, 200, 300, 400};
+//		int[] menuCountList = new int[4];			//메뉴 카운팅 배열
 		
 		//주문 리스트 선언 및 생성
 		System.out.print("주문 리스트 크기 > ");
@@ -35,6 +36,7 @@ public class LunchOrderTestVer3 {
 		String[] paymentNameList = new String[10];	//여기서 10은 결제 리스트에 저장 될 수 있는 최대 숫자
 		int[][] paymentPriceList = new int[10][3];	//여기서 3은 가격, 입금액, 잔돈 이렇게 3개
 		int paymentCount = 0;
+		
 				
 		System.out.println("*******************************************");
 		System.out.println("\tWelcome to Food Mart!!!");
@@ -79,18 +81,22 @@ public class LunchOrderTestVer3 {
 //								case 1:	
 //									orderMenuList[count] = menuList[menuNo-1];
 //									orderPriceList[count] = priceList[menuNo-1];
+//									menuCountList[0] = +1
 //									break;
 //								case 2:	
 //									orderMenuList[count] = menuList[menuNo-1];
 //									orderPriceList[count] = priceList[menuNo-1];
+//									menuCountList[1] = +1
 //									break;
 //								case 3:	
 //									orderMenuList[count] = menuList[menuNo-1];
 //									orderPriceList[count] = priceList[menuNo-1];
+//									menuCountList[2] = +1
 //									break;
 //								case 4:	
 //									orderMenuList[count] = menuList[menuNo-1];
 //									orderPriceList[count] = priceList[menuNo-1];
+//									menuCountList[3] = +1
 //									break;
 //								default : 
 //									System.out.println("메뉴 준비중 입니다.");
