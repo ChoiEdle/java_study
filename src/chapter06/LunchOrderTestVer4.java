@@ -13,7 +13,7 @@ import java.util.Scanner;
  * (2) 입력값이 정확할 때까지 재입력을 유도하여 진행, flag 변수를 이용하여 반복
  * (3) 결제 금액이 부족한 경우 재입력을 통해 금액을 누적으로 계산하여 저장 후 결제
  */
-public class LunchOrderTestVer3 {
+public class LunchOrderTestVer4 {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
@@ -23,7 +23,7 @@ public class LunchOrderTestVer3 {
 		//주문 음식 리스트
 		String[] menuList = {"햄버거(🍔)", "피  자(🍕)", "라  멘(🍜)", "샐러드(🥗)"};
 		int[] priceList = {100, 200, 300, 400};
-//		int[] menuCountList = new int[4];			//메뉴 카운팅 배열
+		int[] menuCountList = new int[4];			//메뉴 카운팅 배열
 		
 		//주문 리스트 선언 및 생성
 		System.out.print("주문 리스트 크기 > ");
@@ -67,41 +67,41 @@ public class LunchOrderTestVer3 {
 						if(scan.hasNextInt()){
 							int menuNo = scan.nextInt();
 							
-							if(1<=menuNo && menuNo<=4) {	//주문 메뉴 선택
-								orderMenuList[count] = menuList[menuNo-1];
-								orderPriceList[count] = priceList[menuNo-1];
-								
-								System.out.println(orderMenuList[count] + " 주문 완료");
-								count++;
-							}else {
-									System.out.println("메뉴 준비중 입니다.");
-							}
-							
-//							switch(menuNo) {				//주문 메뉴 선택
-//								case 1:	
-//									orderMenuList[count] = menuList[menuNo-1];
-//									orderPriceList[count] = priceList[menuNo-1];
-//									menuCountList[0] = +1
-//									break;
-//								case 2:	
-//									orderMenuList[count] = menuList[menuNo-1];
-//									orderPriceList[count] = priceList[menuNo-1];
-//									menuCountList[1] = +1
-//									break;
-//								case 3:	
-//									orderMenuList[count] = menuList[menuNo-1];
-//									orderPriceList[count] = priceList[menuNo-1];
-//									menuCountList[2] = +1
-//									break;
-//								case 4:	
-//									orderMenuList[count] = menuList[menuNo-1];
-//									orderPriceList[count] = priceList[menuNo-1];
-//									menuCountList[3] = +1
-//									break;
-//								default : 
+//							if(1<=menuNo && menuNo<=4) {	//주문 메뉴 선택
+//								orderMenuList[count] = menuList[menuNo-1];
+//								orderPriceList[count] = priceList[menuNo-1];
+//								
+//								System.out.println(orderMenuList[count] + " 주문 완료");
+//								count++;
+//							}else {
 //									System.out.println("메뉴 준비중 입니다.");
-//							}//switch
+//							}
 							
+							switch(menuNo) {				//주문 메뉴 선택
+								case 1:	
+									orderMenuList[count] = menuList[menuNo-1];
+									orderPriceList[count] = priceList[menuNo-1];
+									menuCountList[0] += 1;
+									break;
+								case 2:	
+									orderMenuList[count] = menuList[menuNo-1];
+									orderPriceList[count] = priceList[menuNo-1];
+									menuCountList[1] += 1;
+									break;
+								case 3:	
+									orderMenuList[count] = menuList[menuNo-1];
+									orderPriceList[count] = priceList[menuNo-1];
+									menuCountList[2] += 1;
+									break;
+								case 4:	
+									orderMenuList[count] = menuList[menuNo-1];
+									orderPriceList[count] = priceList[menuNo-1];
+									menuCountList[3] += 1;
+									break;
+								default : 
+									System.out.println("메뉴 준비중 입니다.");
+							}//switch
+							count++;
 							//주문 개수 체크
 							if(count == MAX_SIZE) {		//사실 이걸 위로 옮겨야 count값이 MAX_SIZE값이 되었을 때 메뉴에서 다시 주문으로 못 들어옴
 								System.out.println("=> 주문은 최대 " + MAX_SIZE + "개까지 가능!!!!!");
@@ -124,15 +124,17 @@ public class LunchOrderTestVer3 {
 
 					break;
 				case 2 :	//음식 주문 리스트
+					int total = 0;
 					if(count != 0) {
 						System.out.println("----------------------------------------------");
-						System.out.println("번호\t메뉴명\t가격");
-						System.out.println("----------------------------------------------");
-						for(int i=0; i<count; i++) {
-							System.out.print((i+1) + ".\t");
-							System.out.print(orderMenuList[i] + "\t");
-							System.out.print(orderPriceList[i] + "\n");
+						for(int i=0; i<3; i++) {
+							if(menuCountList[i]!=0) {
+								System.out.print(orderMenuList[i] + " " + menuCountList[i] + "개 ");
+								total += orderPriceList[i] * menuCountList[i];
+							}
 						}
+						System.out.println();
+						System.out.println("총 가격 : " + total);
 						System.out.println("----------------------------------------------");
 					} else {
 						System.out.println("주문하신 메뉴가 없습니다. 주문을 먼저 해주세요");
