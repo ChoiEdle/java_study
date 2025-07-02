@@ -5,7 +5,7 @@ import java.util.Scanner;
 /*
  * ScoreTestVer2의 결과에 메뉴를 추가함
  * 학생 성적 수정 메뉴를 추가한다. (검색 + 등록)
- * 학생 데이터 삭제 메뉴를 추가한다. (검색 + )
+ * 학생 데이터 삭제 메뉴를 추가한다. (검색 + i, count값 수정)
  */
 public class ScoreTestVer3 {
 
