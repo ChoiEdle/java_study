@@ -129,64 +129,67 @@ public class LunchOrderTestVer3 {
 					}
 					break;
 				case 3 : 	//음식 결제
-					boolean paymentFlag = true;
-					int totalPayment = 0;
-					int charge = 0;
-					int change = 0;
-					
-					for(int i=0; i<count; i++) {
-						totalPayment += orderPriceList[i];
-					}
-					
-					while(paymentFlag) {	//결제 요금 부족시 반복 실행
-						System.out.println("=> 결제 예정 금액 : " + totalPayment);
-						System.out.print("결제할 요금 입력 > ");
+					if(count !=0) {
+						boolean paymentFlag = true;
+						int totalPayment = 0;
+						int charge = 0;
+						int change = 0;
 						
-						if(scan.hasNextInt()) {
-							charge += scan.nextInt();
-							System.out.println("총 입력 금액 : " + charge);
-							if(charge >= totalPayment) {
-								change = charge - totalPayment;
-								paymentFlag = false;
-							}else {
-								System.out.println("요금이 부족합니다. 다시 입력해주세요");
-							}
-						} else {
-							System.out.println("올바르지 않은 입력값입니다. 다시 입력해주세요");
-							scan.next();
-						}	//if(scan.hasNextInt())			
-					}//while
-					
-					//paymentNameList, paymentPriceList에 값 넣기
-					paymentNameList[paymentCount] = orderMenuList[0] + "등..";	//결제 내역 리스트에 첫번째 메뉴 + 등..
-					paymentPriceList[paymentCount][0] = totalPayment;			//첫번째 위치에 결제 예정 금액
-					paymentPriceList[paymentCount][1] = charge;					//두번째 위치에 결제 금액
-					paymentPriceList[paymentCount][2] = change;					//세번째 위치에 잔돈
-					
-					System.out.println("=> 결제 완료");
-					//결제 내역 리스트
-					System.out.println("------------------------------------------------");
-					System.out.println("메뉴명\t\t가격\t입금액\t잔돈");
-					System.out.println("------------------------------------------------");
-					System.out.print(paymentNameList[paymentCount] + "\t");
-					for(int j=0; j<3; j++) {
-						System.out.print(paymentPriceList[paymentCount][j] + "\t");
+						for(int i=0; i<count; i++) {
+							totalPayment += orderPriceList[i];
+						}
+						
+						while(paymentFlag) {	//결제 요금 부족시 반복 실행
+							System.out.println("=> 결제 예정 금액 : " + totalPayment);
+							System.out.print("결제할 요금 입력 > ");
+							
+							if(scan.hasNextInt()) {
+								charge += scan.nextInt();
+								System.out.println("총 입력 금액 : " + charge);
+								if(charge >= totalPayment) {
+									change = charge - totalPayment;
+									paymentFlag = false;
+								}else {
+									System.out.println("요금이 부족합니다. 다시 입력해주세요");
+								}
+							} else {
+								System.out.println("올바르지 않은 입력값입니다. 다시 입력해주세요");
+								scan.next();
+							}	//if(scan.hasNextInt())			
+						}//while
+						
+						//paymentNameList, paymentPriceList에 값 넣기
+						paymentNameList[paymentCount] = orderMenuList[0] + "등..";	//결제 내역 리스트에 첫번째 메뉴 + 등..
+						paymentPriceList[paymentCount][0] = totalPayment;			//첫번째 위치에 결제 예정 금액
+						paymentPriceList[paymentCount][1] = charge;					//두번째 위치에 결제 금액
+						paymentPriceList[paymentCount][2] = change;					//세번째 위치에 잔돈
+						
+						System.out.println("=> 결제 완료");
+						//결제 내역 리스트
+						System.out.println("------------------------------------------------");
+						System.out.println("메뉴명\t\t가격\t입금액\t잔돈");
+						System.out.println("------------------------------------------------");
+						System.out.print(paymentNameList[paymentCount] + "\t");
+						for(int j=0; j<3; j++) {
+							System.out.print(paymentPriceList[paymentCount][j] + "\t");
+						}
+						System.out.println();
+						System.out.println("------------------------------------------------");
+						
+						
+						//orderMenuList, orderPriceList 초기화
+						for(int i=0; i<count; i++) {			//기존 배열에 초기값을 선언
+							orderMenuList[i] = null;
+							orderPriceList[i] = 0;
+						}
+//						orderMenuList = new String[MAX_SIZE];	//새로운 배열은 선언
+//						orderPriceList = new int[MAX_SIZE];
+						
+						count = 0;
+						paymentCount++;
+					} else {
+						System.out.println("주문하신 메뉴가 없습니다. 주문을 먼저 해주세요");
 					}
-					System.out.println();
-					System.out.println("------------------------------------------------");
-					
-					
-					//orderMenuList, orderPriceList 초기화
-					for(int i=0; i<count; i++) {			//기존 배열에 초기값을 선언
-						orderMenuList[i] = null;
-						orderPriceList[i] = 0;
-					}
-//					orderMenuList = new String[MAX_SIZE];	//새로운 배열은 선언
-//					orderPriceList = new int[MAX_SIZE];
-					
-					count = 0;
-					paymentCount++;
-					
 					break;
 				case 4 :
 					if(paymentCount != 0) {
