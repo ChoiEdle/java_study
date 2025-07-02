@@ -51,6 +51,10 @@ public class LunchOrderTestVer3 {
 			menu = scan.nextInt();
 			switch(menu) {
 				case 1 :	//음식 주문
+					if(count == MAX_SIZE) {		//주문을 이미 최대치까지 받았을 경우 
+						System.out.println("=> 주문은 최대 " + MAX_SIZE + "개까지 가능! 결제 먼저 해주세요");
+						break;
+					}
 					boolean orderFlag = true;
 					while(orderFlag) {		
 						System.out.println("*******************************************");
