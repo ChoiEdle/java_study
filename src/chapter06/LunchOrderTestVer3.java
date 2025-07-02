@@ -16,36 +16,206 @@ import java.util.Scanner;
 public class LunchOrderTestVer3 {
 
 	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		boolean menuFlag = true;
+		int menu = -1;
+		
+		//주문 음식 리스트
+		String[] menuList = {"햄버거(🍔)", "피  자(🍕)", "라  멘(🍜)", "샐러드(🥗)"};
+		int[] priceList = {100, 200, 300, 400};
+		
+		//주문 리스트 선언 및 생성
+		System.out.print("주문 리스트 크기 > ");
+		final int MAX_SIZE = scan.nextInt();
+		String[] orderMenuList = new String[MAX_SIZE];
+		int[] orderPriceList = new int[MAX_SIZE];
+		int count = 0;
+		
+		//결제 리스트 선언 및 생성
+		String[] paymentNameList = new String[10];
+		int[][] paymentPriceList = new int[10][3];
+		int paymentCount = 0;
+				
 		System.out.println("*******************************************");
 		System.out.println("\tWelcome to Food Mart!!!");
 		System.out.println("*******************************************");
 		System.out.println("\t1. 음식 주문");		
-		System.out.println("\t2. 음식 결제");		
+		System.out.println("\t2. 주문 내역");		
+		System.out.println("\t3. 음식 결제");		
+		System.out.println("\t4. 결제 내역");		
 		System.out.println("\t9. 프로그램 종료");		
 		System.out.println("*******************************************");
 		
-		Scanner scan = new Scanner(System.in);
-		boolean menuFlag = true;
-		int menuNo = -1;
 		while(menuFlag) {
-			menuNo = scan.nextInt();
-			switch(menuNo) {
-			case 1 : 
-				System.out.println("1번입니다.");
-				break;
-			case 2 : 
-				System.out.println("2번입니다.");
-				break;
-			case 9 : 
-				System.out.println("프로그램을 종료합니다.");
-				menuFlag = false;
-				break;
-			default : ;	
+			System.out.print("메뉴 > ");
+			menu = scan.nextInt();
+			switch(menu) {
+				case 1 :	//음식 주문
+					boolean orderFlag = true;
+					while(orderFlag) {		
+						System.out.println("*******************************************");
+						System.out.println("\t1. 햄버거(🍔):100\t2. 피자(🍕):200");		
+						System.out.println("\t3. 라멘(🍜):300\t4. 샐러드(🥗):400");		
+						System.out.println("*******************************************");
+						System.out.print("주문 메뉴(숫자로) > ");
+						if(scan.hasNextInt()){
+							int menuNo = scan.nextInt();
+							
+							if(1<=menuNo && menuNo<=4) {	//주문 메뉴 선택
+								orderMenuList[count] = menuList[menuNo-1];
+								orderPriceList[count] = priceList[menuNo-1];
+								
+								System.out.println(orderMenuList[count] + " 주문 완료");
+								count++;
+							}else {
+									System.out.println("메뉴 준비중 입니다.");
+							}
+							
+//							switch(menuNo) {				//주문 메뉴 선택
+//								case 1:	
+//									orderMenuList[count] = menuList[menuNo-1];
+//									orderPriceList[count] = priceList[menuNo-1];
+//									break;
+//								case 2:	
+//									orderMenuList[count] = menuList[menuNo-1];
+//									orderPriceList[count] = priceList[menuNo-1];
+//									break;
+//								case 3:	
+//									orderMenuList[count] = menuList[menuNo-1];
+//									orderPriceList[count] = priceList[menuNo-1];
+//									break;
+//								case 4:	
+//									orderMenuList[count] = menuList[menuNo-1];
+//									orderPriceList[count] = priceList[menuNo-1];
+//									break;
+//								default : 
+//									System.out.println("메뉴 준비중 입니다.");
+//							}//switch
+							
+							//주문 갯수 체크
+							if(count == MAX_SIZE) {
+								System.out.println("=> 주문은 최대 " + MAX_SIZE + "개까지 가능!!!!!");
+								orderFlag = false;
+							} else {
+								System.out.print("계속 주문?(계속:아무키나, 종료:n)");
+								if(scan.next().equals("n")) {		//여기서 scan에 변수 선언을 하지 않는 이유는 다른곳에서 쓸 일이 없기 때문
+									orderFlag = false;
+								}
+							}
+							
+//							System.out.println("주문하신 메뉴는 " + menuName + ", 가격은 " + menuPrice + "원 입니다.");
+							
+							
+						} else{
+							System.out.println("올바르지 않은 입력값입니다. 다시 입력해주세요");
+							scan.next();	//작업의 끝을 위해서 scan값을 초기화
+						}	//if(scan.hasNextInt())
+					}//while(orderFlag)
+
+					break;
+				case 2 :	//음식 주문 리스트
+					if(count != 0) {
+						System.out.println("----------------------------------------------");
+						System.out.println("번호\t메뉴명\t가격");
+						System.out.println("----------------------------------------------");
+						for(int i=0; i<count; i++) {
+							System.out.print((i+1) + ".\t");
+							System.out.print(orderMenuList[i] + "\t");
+							System.out.print(orderPriceList[i] + "\n");
+						}
+						System.out.println("----------------------------------------------");
+					} else {
+						System.out.println("주문하신 메뉴가 없습니다. 주문을 먼저 해주세요");
+					}
+					break;
+				case 3 : 	//음식 결제
+					boolean paymentFlag = true;
+					int totalPayment = 0;
+					int charge = 0;
+					int change = 0;
+					
+					for(int i=0; i<count; i++) {
+						totalPayment += orderPriceList[i];
+					}
+					
+					while(paymentFlag) {	//결제 요금 부족시 반복 실행
+						System.out.println("=> 결제 예정 금액 : " + totalPayment);
+						System.out.print("결제할 요금 입력 > ");
+						
+						if(scan.hasNextInt()) {
+							charge += scan.nextInt();
+							System.out.println("총 입력 금액 : " + charge);
+							if(charge >= totalPayment) {
+								change = charge - totalPayment;
+								paymentFlag = false;
+							}else {
+								System.out.println("요금이 부족합니다. 다시 입력해주세요");
+							}
+						} else {
+							System.out.println("올바르지 않은 입력값입니다. 다시 입력해주세요");
+							scan.next();
+						}	//if(scan.hasNextInt())			
+					}//while
+					
+					//paymentNameList, paymentPriceList에 값 넣기
+					paymentNameList[paymentCount] = orderMenuList[0] + "등..";	//결제 내역 리스트에 첫번째 메뉴 넣고
+					paymentPriceList[paymentCount][0] = totalPayment;			//첫번째 위치에 결제 예정 금액
+					paymentPriceList[paymentCount][1] = charge;					//두번째 위치에 결제 금액
+					paymentPriceList[paymentCount][2] = change;					//세번째 위치에 잔돈
+					
+					System.out.println("=> 결제 완료");
+					//결제 내역 리스트
+					System.out.println("------------------------------------------------");
+					System.out.println("메뉴명\t\t가격\t입금액\t잔돈");
+					System.out.println("------------------------------------------------");
+					System.out.print(paymentNameList[paymentCount] + "\t");
+					for(int j=0; j<3; j++) {
+						System.out.print(paymentPriceList[paymentCount][j] + "\t");
+					}
+					System.out.println();
+					System.out.println("------------------------------------------------");
+					
+					
+					//orderMenuList, orderPriceList 초기화
+					for(int i=0; i<count; i++) {			//기존 배열에 초기값을 선언
+						orderMenuList[i] = null;
+						orderPriceList[i] = 0;
+					}
+//					orderMenuList = new String[MAX_SIZE];	//새로운 배열은 선언
+//					orderPriceList = new int[MAX_SIZE];
+					
+					count = 0;
+					paymentCount++;
+					
+					break;
+				case 4 :
+					if(paymentCount != 0) {
+						System.out.println("------------------------------------------------");
+						System.out.println("No\t메뉴명\t\t가격\t입금액\t잔돈");
+						System.out.println("------------------------------------------------");
+						for(int i=0; i<paymentCount; i++) {
+							System.out.print((i+1) + "\t" + paymentNameList[i] + "\t");
+							for(int j=0; j<3; j++) {
+								System.out.print(paymentPriceList[i][j] + "\t");
+							}
+							System.out.println();
+						}
+						System.out.println("------------------------------------------------");
+					} else {
+						System.out.println("결제 내역이 없습니다.");
+					}
+					break;
+				case 9 : 
+					System.out.println("프로그램을 종료합니다.");
+					menuFlag = false;
+					break;
+				default : 
+					System.out.println("=> 메뉴 준비중!!!");
 			}
-		}
+		}//while(menuFlag)
 		
 		
 		
-	}
+	}//main
 
 }
