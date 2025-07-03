@@ -1,5 +1,8 @@
 package chapter07;
-
+/*
+ * - 학생 3명의 점수를 입력 받는다.
+ * - 한 명 입력 후 계속 입력 여부를 메세지로 출력 후 입력 받는다.
+ */
 import java.util.Scanner;
 
 public class ScoreMgmSystem {
@@ -17,17 +20,24 @@ public class ScoreMgmSystem {
 	
 	//Method
 	public void insert() {
-		System.out.println("insert");
-		student = new Student();
-		System.out.print("학생명 > ");
-		student.name = scan.next();
-		System.out.print("국어 > ");
-		student.kor = scan.nextInt();
-		System.out.print("영어 > ");
-		student.eng = scan.nextInt();
-		System.out.print("수학 > ");
-		student.math = scan.nextInt();
-		System.out.println("=> 등록 완료!!");
+		boolean insertFlag = true;
+		while(insertFlag) {
+			System.out.println("insert");
+			student = new Student();
+			System.out.print("학생명 > ");
+			student.name = scan.next();
+			System.out.print("국어 > ");
+			student.kor = scan.nextInt();
+			System.out.print("영어 > ");
+			student.eng = scan.nextInt();
+			System.out.print("수학 > ");
+			student.math = scan.nextInt();
+			System.out.println("=> 등록 완료!! 계속 입력 하시겠습니까?(계속:아무키, 종료:n)");
+			if(scan.next().equals("n")) {
+				System.out.println("종료");
+				insertFlag = false;
+			} 
+		}
 	}
 	
 	public void show() {
