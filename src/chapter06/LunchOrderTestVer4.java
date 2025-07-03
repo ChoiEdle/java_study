@@ -195,6 +195,8 @@ public class LunchOrderTestVer4 {
 						for(int i=0; i<count; i++) {			//기존 배열에 초기값을 선언
 							orderMenuList[i] = null;
 							orderPriceList[i] = 0;
+							menuCountList[i] = 0;
+							
 						}
 //						orderMenuList = new String[MAX_SIZE];	//새로운 배열은 선언
 //						orderPriceList = new int[MAX_SIZE];
