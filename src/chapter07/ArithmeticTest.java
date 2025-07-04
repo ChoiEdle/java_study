@@ -9,7 +9,11 @@ public class ArithmeticTest {
 		System.out.println("arithmetic_ol.add = " + arithmetic_ol.add(10, 20));
 		System.out.println("arithmetic_ol.add = " + arithmetic_ol.add(3.14, 1.5));
 		System.out.println("arithmetic_ol.add = " + arithmetic_ol.add("100", "200"));
+		System.out.println("arithmetic_ol.add = " + arithmetic_ol.add(1,2,3,4,8,9,10,56,7));
+		System.out.println("arithmetic_ol.add = " + arithmetic_ol.add("1", "2", "3"));
+		
 		System.out.println("------------------------------------------");
+		
 		int add = arithmetic.add(10.7, 20.8);
 		int sub = arithmetic.sub(20, 30);
 		double mul = arithmetic.mul(3.24, 10);
