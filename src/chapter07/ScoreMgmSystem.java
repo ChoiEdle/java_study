@@ -122,15 +122,9 @@ public class ScoreMgmSystem {
 	
 	public void update() {
 		if(count !=0) {
-			System.out.print("[수정]학생명 검색 > ");
-			String modifiedName = scan.next();
-			int modiIdx = -1;
+			System.out.println("=> 학생 정보를 수정하세요");
+			int modiIdx = searchIndex("[수정]");
 			
-			for(int i=0; i<count; i++) {
-				if(sList[i].name.equals(modifiedName)) {
-					modiIdx = i;
-				}
-			}
 			if(modiIdx == -1) {
 				System.out.println("수정할 데이터가 존재X, 다시 입력해주세요");
 			} else {
@@ -168,25 +162,68 @@ public class ScoreMgmSystem {
 		} else {
 			System.out.println("=> 등록된 데이터 없음, 등록부터 진행해 주세요");
 		}
-
+	}
+	
+	public void recursiveCall(String p) {
+		System.out.print("계속 수정 하시겠습니까(계속:아무키나누르세요, 종료:n)?");
+		if(scan.next().equals("n")) {				
+			showMenu();
+		} else {
+			update();
+		}
 	}
 	
 	public void remove() {
-		System.out.println("remove");
+		if(count != 0){
+			System.out.println("=> 학생 정보를 삭제하세요");
+			int deleteIdx = searchIndex("[삭제]");
+			
+			if(deleteIdx != -1) {
+				for(int i=deleteIdx; i<count-1; i++) {	//조건에 count를 하면 마지막에 +1이 되어 범위 오버 할 수도
+					sList[i] = sList[i+1];
+				}
+				sList[count-1] = null;		//showList에서 null이 아닐때까지 출력을 해놨기에 추가함
+				count--;
+				
+				System.out.println("=> 삭제 완료!!!");
+				System.out.print("계속 진행 하시겠습니까(계속:아무키나누르세요, 종료:n)?");
+				if(scan.next().equals("n")) {
+					showMenu();
+				} else {
+					remove();
+				}
+
+			} else {
+				System.out.println("삭제할 데이터가 존재X, 다시 입력해주세요");
+			}
+			
+		} else {
+			System.out.println("=> 등록된 데이터 없음, 등록부터 진행해 주세요");
+		}
+	}
+	
+	/*
+	 * 학생명을 검색하여 주소를 리턴하는 메소드
+	 */
+	
+	public int searchIndex(String pname) {
+		System.out.print(pname + "학생명 검색 > ");
+		String searchName = scan.next();
+		int searchIdx = -1;
+		for(int i=0; i<count; i++) {
+			Student student = sList[i];
+			if(student.name.equals(searchName)) {
+				searchIdx = i;
+			}
+		}
+		return searchIdx;
 	}
 	
 	public void search() {
 		if(count != 0) {
 			System.out.println("=> 학생 정보를 검색하세요");
-			System.out.print("학생명 검색 > ");
-			String searchName = scan.next();
-			int searchIdx = -1;
-			for(int i=0; i<count; i++) {
-				Student student = sList[i];
-				if(student.name.equals(searchName)) {
-					searchIdx = i;
-				}
-			}
+			int searchIdx = searchIndex("[검색]");
+			
 			if(searchIdx != -1) {
 				System.out.println("-------------------------------------------------");
 				System.out.println("\t\t검색 결과");
@@ -209,7 +246,14 @@ public class ScoreMgmSystem {
 					search();		//재귀호출
 				}
 			} else {
-				System.out.println("해당 학생은 없습니다.");
+				System.out.println("=> 검색 데이터 없음");
+				System.out.println("=> 검색 완료!! 계속 입력 하시겠습니까?(계속:아무키, 종료:n)");
+				if(scan.next().equals("n")) {
+					System.out.println("종료");
+					showMenu();
+				} else {
+					search();		//재귀호출
+				}
 			}
 		} else {
 			System.out.println("등록된 데이터 없음, 등록부터 진행해 주세요");
