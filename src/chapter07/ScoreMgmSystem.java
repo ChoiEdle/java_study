@@ -164,14 +164,16 @@ public class ScoreMgmSystem {
 		}
 	}
 	
-	public void recursiveCall(String p) {
-		System.out.print("계속 수정 하시겠습니까(계속:아무키나누르세요, 종료:n)?");
+	/*
+	public void recursiveCall(String p) {	//계속 하시겠습니까 메소드였는데 재귀호출에서 막힘...
+		System.out.print("계속 하시겠습니까(계속:아무키나누르세요, 종료:n)?");
 		if(scan.next().equals("n")) {				
 			showMenu();
 		} else {
-			update();
+			
 		}
 	}
+	*/
 	
 	public void remove() {
 		if(count != 0){
