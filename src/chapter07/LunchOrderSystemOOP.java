@@ -138,9 +138,10 @@ public class LunchOrderSystemOOP {
 		public void orderItemListInit() {
 			orderItemList = new LunchOrderItem[4];
 			
-			for(LunchOrderItem orderItem : orderItemList) {
-				if(orderItem != null) orderItem = null;
-			}
+//			for(LunchOrderItem orderItem : orderItemList) {
+//				if(orderItem != null) orderItem = null;
+//			}
+			
 			orderCount = 0;
 			amount = 0;
 		}
