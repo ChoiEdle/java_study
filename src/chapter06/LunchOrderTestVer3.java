@@ -37,18 +37,16 @@ public class LunchOrderTestVer3 {
 		int[][] paymentPriceList = new int[10][3];	//여기서 3은 가격, 입금액, 잔돈 이렇게 3개
 		int paymentCount = 0;
 		
-				
-		System.out.println("*******************************************");
-		System.out.println("\tWelcome to Food Mart!!!");
-		System.out.println("*******************************************");
-		System.out.println("\t1. 음식 주문");		
-		System.out.println("\t2. 주문 내역");		
-		System.out.println("\t3. 음식 결제");		
-		System.out.println("\t4. 결제 내역");		
-		System.out.println("\t9. 프로그램 종료");		
-		System.out.println("*******************************************");
-		
 		while(menuFlag) {
+			System.out.println("*******************************************");
+			System.out.println("\tWelcome to Food Mart!!!");
+			System.out.println("*******************************************");
+			System.out.println("\t1. 음식 주문");		
+			System.out.println("\t2. 주문 내역");		
+			System.out.println("\t3. 음식 결제");		
+			System.out.println("\t4. 결제 내역");		
+			System.out.println("\t9. 프로그램 종료");		
+			System.out.println("*******************************************");
 			System.out.print("메뉴 > ");
 			menu = scan.nextInt();
 			switch(menu) {
