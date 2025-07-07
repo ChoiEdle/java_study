@@ -6,6 +6,7 @@ public class OrderSystem {
 	//Field
 	Scanner scan = new Scanner(System.in);
 	Order order = new Order();
+	Menu[] menu = new Menu[3];
 	String[] menuNameList = {"☕ 아메리카노", "🍵 바닐라 라떼", "🥤 딸기 쉐이크"};
 	int[] menuPriceList = {2800, 3500, 4000};
 	int amount = 0;
@@ -16,7 +17,11 @@ public class OrderSystem {
 	public void showMainMenu() {
 		System.out.println("=== 메뉴판 ===");
 		for(int i=0; i<menuNameList.length; i++) {
-			System.out.println((i+1) + ". " + menuNameList[i] + " - " + menuPriceList[i] + "원");
+			Menu drinkMenu = new Menu();
+			drinkMenu.name = menuNameList[i];
+			drinkMenu.price = menuPriceList[i];
+			menu[i] = drinkMenu;
+			System.out.println((i+1) + ". " + menu[i].name + " - " + menu[i].price + "원");
 		}
 		System.out.println();
 		selectMenu();
@@ -46,22 +51,8 @@ public class OrderSystem {
 	
 	//주문
 	public void order(int menuNo) {
-		switch(menuNo) {
-			case 1: 
-				order.selectMenu = menuNameList[0];
-				order.totalPayment = menuPriceList[0];
-				break;
-			case 2: 
-				order.selectMenu = menuNameList[1];
-				order.totalPayment = menuPriceList[1];
-				break;
-			case 3: 
-				order.selectMenu = menuNameList[2];
-				order.totalPayment = menuPriceList[2];
-				break;
-			default : 
-				System.out.println();
-		}
+		order.selectMenu = menu[menuNo-1].name;
+		order.totalPayment = menu[menuNo-1].price;
 		System.out.println("=> 주문 메뉴 : " + order.selectMenu + ", 결제 예정 금액 : " + order.totalPayment + "원\n");
 		payment();
 	}
@@ -78,6 +69,7 @@ public class OrderSystem {
 			if(amount >= total) {
 				change = amount - total;
 				System.out.println("=> 결제 완료! 잔돈: " + change);
+				System.out.println("[종료]\n" + "이용해주셔서 감사합니다.");
 			}else {
 				System.out.println("금액이 부족합니다. 다시 입력해주세요.");
 				payment();
@@ -87,7 +79,6 @@ public class OrderSystem {
 			scan.next();
 		}	//if(scan.hasNextInt())	
 		
-		System.out.println("[종료]\n" + "이용해주셔서 감사합니다.");
 	}
 	
 }
