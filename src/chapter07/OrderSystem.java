@@ -72,6 +72,7 @@ public class OrderSystem {
 				System.out.println("[종료]\n" + "이용해주셔서 감사합니다.");
 			}else {
 				System.out.println("금액이 부족합니다. 다시 입력해주세요.");
+				System.out.println();
 				payment();
 			}
 		} else {

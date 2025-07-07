@@ -151,7 +151,7 @@ public class LunchOrderSystemOOP {
 		
 		System.out.println(lunchMenu + " 주문!");
 		//lunchMenuList의 메뉴 번호 확인
-		for(LunchMenu menu : lunchMenuList) {
+		for(LunchMenu menu : lunchMenuList) {							//여기가 가장 어려웠다
 			if(menu.no == lunchMenu) {
 				int idx = searchOrderItemIdx(lunchMenu);
 				if(idx == -1) {
