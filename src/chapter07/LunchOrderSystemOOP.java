@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class LunchOrderSystemOOP {
 	//Field
-	Scanner scan = new Scanner(System.in);
-	String[] lunchMenuNames = {"햄버거(🍔)", "피  자(🍕)", "라  멘(🍜)", "샐러드(🥗)"};
+	Scanner scan;
+	String[] lunchMenuNames = {"햄버거(🍔)", "피  자(🍕)", "라  멘(🍜)", "샐러드(🥗)"}; 	//선언+할당이 동시에
 	int[] lunchMenuPrice = {100, 200, 300, 400};
-	LunchMenu[] lunchMenuList = new LunchMenu[4];		//주문할 메뉴 : LunchMenu
-	LunchOrderItem[] orderItemList = new LunchOrderItem[4]; 	//나중에는 리스트라는걸 쓰면 숫자 제한이 없다고함
+	LunchMenu[] lunchMenuList;			//주문할 메뉴 : LunchMenu	//크기만 선언
+	LunchOrderItem[] orderItemList; 	//나중에는 리스트라는걸 쓰면 숫자 제한이 없다고함
 	LunchPaymentItem paymentItem;
 	int orderCount = 0;
 	int amount = 0;		//사용자 입력 결제 금액
@@ -19,6 +19,14 @@ public class LunchOrderSystemOOP {
 	
 	
 	//Constructor
+	public LunchOrderSystemOOP() {
+		scan = new Scanner(System.in);
+		lunchMenuList = new LunchMenu[4];
+		orderItemList = new LunchOrderItem[4];
+		
+		createLunchMenu();		//이거 없으면 런치메뉴가 생성이 안되서 오류남(나중에 생성자로 뺀다고 하셨음)	//생성자에서 위치도 중요함
+	}
+	
 	
 	//Method
 	//런치메뉴 생성
@@ -81,7 +89,6 @@ public class LunchOrderSystemOOP {
 		System.out.println("\t4. 결제 내역");		
 		System.out.println("\t9. 프로그램 종료");		
 		System.out.println("*******************************************");
-		createLunchMenu();		//이거 없으면 런치메뉴가 생성이 안되서 오류남(나중에 생성자로 뺀다고 하셨음)
 		selectMainMenu();
 	}//showMainMenu
 	
