@@ -15,17 +15,22 @@ public class Payment {
 		this.amount += amount;
 	}
 	
+	public int getAmount() {
+		return amount;
+	}
+	
 	public int getChange() {
 		return change;
 	}
 	
-	public void getPayment(int total) {
+	public boolean getPayment(int total) {
+		boolean result = false;
 		if(amount>=total) {
 			change = amount - total;
-			System.out.println("=> 결제 완료!!!");
-		} else {
-			System.out.println("=> 결제 금액 부족!!");
-		}
+			result = true;
+		} 
+		
+		return result;
 	}
 	
 }
