@@ -15,6 +15,10 @@ public class AnimalTest {
 		Animal2 tiger2 = new Animal2("호돌이");
 		Animal2 elephant2 = new Animal2();
 		
+		Animal3 lion3 = new Animal3("심바");
+		
+		lion3.info();
+		
 		lion.name = "심바";
 		lion.age = 5;
 		
@@ -44,6 +48,8 @@ public class AnimalTest {
 		System.out.println("tiger2.age = " + tiger2.age);
 		System.out.println("elephant2.name = " + elephant2.name);
 		System.out.println("elephant2.age = " + elephant2.age);
+		
+		
 	}
 
 }
