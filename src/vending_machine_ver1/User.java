@@ -18,23 +18,23 @@ public class User {
 	}
 	
 	//Method
-//	public boolean coinCheck(int coin) {
-//		boolean result = false;
-//		if(coin == 100 || coin == 500)
-//		return result;
-//	}
-	
+	//동전 ㅇ비력
 	public int insertCoin() {
-		int menu = 0;
-		System.out.print("["+name+"]동전 > ");
+		int resultCoin = 0;
+		System.out.print("["+name+"]동전입력 > ");
 		if(scan.hasNextInt()) {
-			menu = scan.nextInt();
+			//동전 체크 : 100원, 500원만 입력 가능
+			int coin = scan.nextInt();
+			resultCoin = coin;
+//			if(coinCheck(coin)) {
+//				
+//			}
 		} else {
 			System.out.println("=> 올바르지 않은 값, 다시 입력해주세요.");
 			scan.next();
 			insertCoin();
 		}
-		return menu;
+		return resultCoin;
 	}
 	
 	public int selectMenu() {
