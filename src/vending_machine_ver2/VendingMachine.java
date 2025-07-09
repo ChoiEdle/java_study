@@ -8,8 +8,8 @@ public class VendingMachine {
 	Menu[] ableMenuList;
 	Menu orderMenu;
 	int ableCount = 0;
-	String[] menuList = {"우   유", "유 자 차", "율 무 차", "핫 초 코", "밀크커피"};
-	int[] priceList = {200, 300, 300, 300, 400};
+	String[] menuList = {"우   유", "유 자 차", "율 무 차", "핫 초 코", "밀크커피", "레몬에이드"};
+	int[] priceList = {200, 300, 300, 300, 400, 500};
 	User user = new User();
 	int totalCoin = 0;
 	int change = 0;
@@ -63,6 +63,7 @@ public class VendingMachine {
 		}
 		System.out.println("-------------------------------------------------------");
 	}
+	
 	//코인 체크
 	public void coinCheck() {
 		System.out.println("동전을 투입하세요.(100원, 500원만 가능)");
