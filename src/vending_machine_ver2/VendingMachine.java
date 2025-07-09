@@ -13,12 +13,18 @@ public class VendingMachine {
 	User user = new User();
 	int totalCoin = 0;
 	int change = 0;
+	String title;
 	
 	public static final int EXIT = 9;
 	
 	
 	//Constructor
 	public VendingMachine() {
+		this("음료");
+	}
+	
+	public VendingMachine(String title) {
+		this.title = title;
 		playSystem();
 	}
 	
@@ -47,11 +53,15 @@ public class VendingMachine {
 	
 	//메뉴 출력
 	public void showMenuList() {
+		System.out.println("-------------------------------------------------------");
+		System.out.println("\t그놈의 " + title + " 자판기");
+		System.out.println("-------------------------------------------------------");
 		for(Menu menu : orderMenuList) {
 			System.out.print(menu.getNo() + ". \t");
 			System.out.print(menu.getName() + "\t\t");
 			System.out.print(menu.getPrice() + "원\n");
 		}
+		System.out.println("-------------------------------------------------------");
 	}
 	//코인 체크
 	public void coinCheck() {
@@ -60,7 +70,6 @@ public class VendingMachine {
 			int insultCoin = user.getScan().nextInt();
 			if(insultCoin == 100 || insultCoin == 500) {
 				totalCoin += insultCoin;
-				System.out.println("투입 금액 : " + totalCoin);
 				menuCoinCheck();
 			} else {
 				System.out.println("100원 또는 500원이 아닙니다.");
@@ -92,6 +101,8 @@ public class VendingMachine {
 	//가능한 메뉴 리스트
 	public void ableMenuList() {
 		ableMenuList = new Menu[orderMenuList.length];
+		System.out.println("현재 금액 : " + totalCoin);
+		System.out.println("-------------------------------------------------------");
 		for(Menu menu : orderMenuList) {
 			if(menu.getPrice()<=totalCoin) {
 				ableMenuList[ableCount] = menu;
@@ -101,6 +112,7 @@ public class VendingMachine {
 				ableCount++;
 			}
 		}
+		System.out.println("-------------------------------------------------------");
 	}
 	
 	//주문 가능 메뉴 번호를 골랐는지 확인 메소드
@@ -160,9 +172,11 @@ public class VendingMachine {
 	//결제
 	public void payment() {
 		change = totalCoin-orderMenu.getPrice();
+		System.out.println("-------------------------------------------------------");
 		System.out.print("주문하신 메뉴 : " + orderMenu.getName() + "\t");
 		System.out.print("결제 금액 : " + orderMenu.getPrice() + "\t");
 		System.out.println("잔돈 : " + change);
+		System.out.println("-------------------------------------------------------");
 	}
 	
 	//파이널 체크
