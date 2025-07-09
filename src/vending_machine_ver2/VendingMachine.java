@@ -54,7 +54,7 @@ public class VendingMachine {
 	//메뉴 출력
 	public void showMenuList() {
 		System.out.println("-------------------------------------------------------");
-		System.out.println("\t그놈의 " + title + " 자판기");
+		System.out.println("\t" + title + " 자판기");
 		System.out.println("-------------------------------------------------------");
 		for(Menu menu : orderMenuList) {
 			System.out.print(menu.getNo() + ". \t");
