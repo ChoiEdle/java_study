@@ -14,6 +14,8 @@ public class VendingMachine {
 	int totalCoin = 0;
 	int change = 0;
 	
+	public static final int EXIT = 9;
+	
 	
 	//Constructor
 	public VendingMachine() {
@@ -101,12 +103,39 @@ public class VendingMachine {
 		}
 	}
 	
+	//주문 가능 메뉴 번호를 골랐는지 확인 메소드
+	public boolean selectMenuCheck(int menuNo) {
+		boolean result = false;
+		for(Menu menu : ableMenuList) {
+			if(menu == null) {
+				break;
+			} else {
+				if(menu.getNo() == menuNo) {
+					result = true;
+				}
+			}
+		}
+		return result;
+	}
+	
+	
 	//메뉴 선택
 	public void selectMenu() {
-		System.out.println("음료를 선택하세요.");
+		System.out.println("음료를 선택하세요.(취소는 ["+ EXIT +"]를 입력해주세요)");
 		if(user.getScan().hasNextInt()) {
 			int menuNo = user.getScan().nextInt();
-			order(menuNo);
+			if(menuNo == 9) {
+				System.out.println("잔돈 : " + totalCoin + "원을 반환합니다.");
+				System.out.println("이용해주셔서 감사합니다.");
+				System.exit(0);
+			} else {
+				if(selectMenuCheck(menuNo)) {
+					order(menuNo);
+				} else {
+					System.out.println("해당 메뉴 선택 할 수 없습니다.");
+					selectMenu();
+				}
+			}
 		} else {
 			System.out.println("잘못 입력 하셨습니다.");
 			user.getScan().next();
@@ -122,7 +151,8 @@ public class VendingMachine {
 			} else {
 				if(menu.getNo() == menuNo) {
 					orderMenu = menu;
-				}
+					break;
+				} 
 			}
 		}
 	}
