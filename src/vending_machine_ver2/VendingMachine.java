@@ -75,7 +75,7 @@ public class VendingMachine {
 	
 	//메뉴 or 동전 체크
 	public void menuCoinCheck() {
-		if(totalCoin >= priceList[0]) {
+		if(totalCoin >= lowPrice()) {
 			System.out.println("=> 메뉴선택(n), 동전투입계속(아무키) > ");
 			String input = user.getScan().next();
 			if(input.equals("n")) {
@@ -167,7 +167,7 @@ public class VendingMachine {
 	
 	//파이널 체크
 	public void finalCheck() {
-		if(change >= priceList[0]) {
+		if(change >= lowPrice()) {
 			bigChange();
 		} else {
 			System.out.println("잔돈 : " + change + "원을 반환합니다.");
@@ -175,12 +175,26 @@ public class VendingMachine {
 			System.exit(0);
 		}
 	}
+	
+	//메뉴중에 가장 싼 메뉴의 가격을 리턴해주는 메소드
+	public int lowPrice() {
+		int low = priceList[0];
+		for(int i=0; i<priceList.length; i++) {
+			if(low>priceList[i]) {
+				low = priceList[i];
+			}
+		}
+		return low;
+	}
+	
+	//초기화 메소드
 	public void reset() {
 		ableMenuList = null;
 		orderMenu = null;
 		ableCount = 0;
 	}
 	
+	//잔돈이 많을 때 반복하는 메소드
 	public void bigChange() {
 		totalCoin = change;
 		reset();
