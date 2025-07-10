@@ -1,7 +1,5 @@
 package kbank;
 
-import chapter07.Singleton;
-
 public class AccountPaperVo {
 	//Field
 	private String name;
