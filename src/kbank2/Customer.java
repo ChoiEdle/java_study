@@ -76,5 +76,26 @@ public class Customer {
 //		this.accountPaper.setMoney(this.money);
 	}
 	
+	public AccountPaperVo answer(int checkResult) {
+		switch(checkResult) {
+			case BankMan.ACCOUNT_NAME :
+				System.out.print("고객명 > ");
+				accountPaper.setName(scan.next());
+				break;
+			case BankMan.ACCOUNT_NUMBER :
+				System.out.print("계좌번호 > ");
+				accountPaper.setAccountNumber(scan.next());
+				break;
+			case BankMan.ACCOUNT_PASSWORD :
+				System.out.print("패스워드 > ");
+				accountPaper.setPassword(scan.next());
+				break;
+			case BankMan.ACCOUNT_MONEY :
+				System.out.print("출금액 > ");
+				accountPaper.setMoney(scan.nextInt());
+				break;
+		}
+		return accountPaper;
+	}
 	
 }

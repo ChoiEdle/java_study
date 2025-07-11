@@ -6,6 +6,7 @@ public class BankMan {
 	private AccountPaperVo accountPaper;
 	private AccountVo[] accountList;
 	private BankSystem kbsystem;
+	int checkResult;
 	
 	public static final int ACCOUNT_NAME = 1;
 	public static final int ACCOUNT_NUMBER = 2;
@@ -30,15 +31,19 @@ public class BankMan {
 		switch(status) {
 			case ACCOUNT_NAME :
 				System.out.println(this.name + " 이름을 입력해주세요");
+				checkResult = ACCOUNT_NAME;
 				break;
 			case ACCOUNT_NUMBER:
 				System.out.println(this.name + " 계좌번호를 입력해주세요");
+				checkResult = ACCOUNT_NUMBER;
 				break;
 			case ACCOUNT_PASSWORD:
 				System.out.println(this.name + " 패스워드를 입력해주세요");
+				checkResult = ACCOUNT_PASSWORD;
 				break;
 			case ACCOUNT_MONEY:
 				System.out.println(this.name + " 금액을 입력해주세요");
+				checkResult = ACCOUNT_MONEY;
 				break;
 		
 		}
@@ -63,6 +68,26 @@ public class BankMan {
 		}
 	}
 	
+	public boolean vaildateCheck(AccountPaperVo updateAccountPaper) {
+		boolean result = false;
+		System.out.println(this.name + " 고객 정보에 대한 유효성 체크를 재진행한다.");
+		this.accountPaper = updateAccountPaper;
+		if(accountPaper.getName() == null) {
+			ask(ACCOUNT_NAME);
+		} else if(accountPaper.getAccountNumber() == null) {
+			ask(ACCOUNT_NUMBER);
+		} else if(accountPaper.getPassword() == null) {
+			ask(ACCOUNT_PASSWORD);
+		} else if(accountPaper.getMoney() == 0) {
+			ask(ACCOUNT_MONEY);
+		} else {
+			//모두 입력되어 있음
+			System.out.println("모두 입력");
+			result = true;
+		}
+		return result;
+	}
+	
 	public AccountPaperVo getAccountPaper() {
 		return accountPaper;
 	}
@@ -82,7 +107,13 @@ public class BankMan {
 	public void setKbsystem(BankSystem kbsystem) {
 		this.kbsystem = kbsystem;
 	}
-	
+	/**
+	 * 출금 요청 처리
+	 */
+	public void processWithdrawal() {
+		System.out.println(this.name + " 출금요청 처리 진행 중입니다. 잠시만 기다려주세요");
+		//고객계정 검색 - BankSystem > 잔고-금액
+	}
 	
 	
 //	public void createAccountList() {

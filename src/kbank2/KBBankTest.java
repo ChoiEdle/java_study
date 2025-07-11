@@ -10,15 +10,24 @@ public class KBBankTest {
 		
 		BankMan staffPark = new BankMan("박보검", kbsystem);	//은행직원 생성시 고객리스트 정보 가짐
 		
-		Customer hong = new Customer("홍길동", null, "1234", 100);
+		Customer hong = new Customer("홍길동", "Kb-1234", null, 0);
+		boolean validateFlag = true;
 		hong.setAccountPaper(accountPaper);
 //		hong.getAccountPaper().showInfo();	//static이라 이렇게 쓸필요없다고 노란 메세지 뜸
-//		AccountPaperVo.showInfo();
 		
 		//은행직원이 고객의 용지를 받는다.
 		staffPark.setAccountPaper(hong.getAccountPaper());
 		staffPark.vaildateCheck();		//고객에게 전달받은 출금용지에 빈값이 있는지 체크!
+//		hong.answer(staffPark.checkResult);
+		AccountPaperVo.showInfo();
+		while(validateFlag) {
+			if(staffPark.vaildateCheck(hong.answer(staffPark.checkResult))) {		//고객에게 전달받은 출금용지에 빈값이 있는지 체크!
+				validateFlag = false;
+			}
+		}
+		AccountPaperVo.showInfo();
 		
+		staffPark.processWithdrawal();
 		
 	}
 
