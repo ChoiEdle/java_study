@@ -16,11 +16,12 @@ public class Customer {
 		
 	}
 	public Customer(String name, String accountNumber, String password, int money) {
-		this.name = name;
+		this.name = "[고객 : " + name + "]";
 		this.accountNumber = accountNumber;
 		this.password = password;
 		this.money = money;
 		this.scan = new Scanner(System.in);
+		System.out.println(this.name + " 입장");
 	}
 	
 	
@@ -56,6 +57,7 @@ public class Customer {
 		this.scan = scan;
 	}
 	public AccountPaperVo getAccountPaper() {
+		System.out.println(this.name + " 은행직원에게 출금용지 전달!");
 		return accountPaper;
 	}
 	public void setAccountPaper(AccountPaperVo accountPaper) {
@@ -64,6 +66,8 @@ public class Customer {
 		accountPaper.setPassword(this.password);
 		accountPaper.setMoney(this.money);
 		this.accountPaper = accountPaper;
+		
+		System.out.println(this.name + " 출금정보 작성 완료!");
 		
 //		this.accountPaper = accountPaper;
 //		this.accountPaper.setName(this.name);
