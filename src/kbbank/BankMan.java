@@ -61,6 +61,7 @@ public class BankMan {
 	 */
 	public void checkPaper(AccountPaperVo accountPaper, Customer customer) {
 		this.customer = customer;
+		this.accountPaper = accountPaper;
 		
 		System.out.println("[은행직원 : " + name + "] 출금 용지 정보를 확인하는 중입니다..");
 		if(accountPaper.getName() == null) {
