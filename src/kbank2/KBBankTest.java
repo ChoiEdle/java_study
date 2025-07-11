@@ -10,7 +10,7 @@ public class KBBankTest {
 		
 		BankMan staffPark = new BankMan("박보검", kbsystem);	//은행직원 생성시 고객리스트 정보 가짐
 		
-		Customer hong = new Customer("홍길동", "kb-1234", "1234", 0);
+		Customer hong = new Customer("홍길동", "kb-1234", null, 0);
 		boolean validateFlag = true;
 		hong.setAccountPaper(accountPaper);
 //		hong.getAccountPaper().showInfo();	//static이라 이렇게 쓸필요없다고 노란 메세지 뜸
@@ -31,6 +31,9 @@ public class KBBankTest {
 //		kbsystem.showAccountList();
 		
 		kbsystem.confirmBalace(hong.getAccountPaper());		//은행시스템을 이용하여 잔액을 확인
+		
+		
+		
 	}
 
 }
