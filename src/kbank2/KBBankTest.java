@@ -28,7 +28,7 @@ public class KBBankTest {
 		AccountPaperVo.showInfo();
 		
 		staffPark.processWithdrawal();
-		kbsystem.showAccountList();
+//		kbsystem.showAccountList();
 		
 		kbsystem.confirmBalace(hong.getAccountPaper());		//은행시스템을 이용하여 잔액을 확인
 	}
