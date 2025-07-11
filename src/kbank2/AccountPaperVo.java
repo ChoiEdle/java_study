@@ -17,6 +17,15 @@ public class AccountPaperVo {
 	}
 	
 	//Method
+	public static void showInfo() {
+		System.out.println("----------------------------------------------------------------------");
+		System.out.print(accountPaper.name + "\t");
+		System.out.print(accountPaper.getAccountNumber() + "\t");
+		System.out.print(accountPaper.getPassword() + "\t");
+		System.out.print(accountPaper.money + "\n");
+		System.out.println("----------------------------------------------------------------------");
+	}
+	
 	public static AccountPaperVo getInstance() {
 		return accountPaper;
 	}
