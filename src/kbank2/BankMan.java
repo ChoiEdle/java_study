@@ -113,8 +113,30 @@ public class BankMan {
 	public void processWithdrawal() {
 		System.out.println(this.name + " 출금요청 처리 진행 중입니다. 잠시만 기다려주세요");
 		//고객계정 검색 - BankSystem > 잔고-금액
+		int accountIdx = kbsystem.searchAccount(accountPaper);
+		if(accountIdx != -1) {
+			AccountVo account = kbsystem.accountList[accountIdx];
+			if(account.getMoney()>=accountPaper.getMoney()) {
+				System.out.println(this.name + " 출금 가능.");
+				//출금 진행 후 계좌 업데이트!
+				int money = account.getMoney() - accountPaper.getMoney();
+				account.setMoney(money);
+				kbsystem.accountList[accountIdx] = account;
+				
+				processCompleted();
+			} else {
+				System.out.println(this.name + " 잔액이 부족합니다.");
+			}
+		} else {
+			System.out.println(this.name + " 계좌정보가 일치하지 않습니다. 확인후 다시 진행해주세요.");
+			//고객 정보가 일치하지 않음
+		}
 	}
 	
+	public void processCompleted() {
+		System.out.println(this.name + " 출금처리가 완료되었습니다.");
+		System.out.println(this.name + " 출금액은 " + accountPaper.getMoney() + "입니다.");
+	}
 	
 //	public void createAccountList() {
 //		String[] names = {"홍길동", "이순신", "김유신"};

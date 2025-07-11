@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Customer {
 	//Field
+	private String wname;
 	private String name;
 	private String accountNumber;
 	private String password;
@@ -16,6 +17,7 @@ public class Customer {
 		
 	}
 	public Customer(String name, String accountNumber, String password, int money) {
+		this.wname = name;
 		this.name = "[고객 : " + name + "]";
 		this.accountNumber = accountNumber;
 		this.password = password;
@@ -28,6 +30,12 @@ public class Customer {
 	//Method
 	public String getName() {
 		return name;
+	}
+	public String getWname() {
+		return wname;
+	}
+	public void setWname(String wname) {
+		this.wname = wname;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -61,7 +69,7 @@ public class Customer {
 		return accountPaper;
 	}
 	public void setAccountPaper(AccountPaperVo accountPaper) {
-		accountPaper.setName(this.name);
+		accountPaper.setName(this.wname);
 		accountPaper.setAccountNumber(this.accountNumber);
 		accountPaper.setPassword(this.password);
 		accountPaper.setMoney(this.money);

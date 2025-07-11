@@ -51,5 +51,44 @@ public class BankSystem {
 		System.out.println("----------------------------------------------------------------------");
 	}
 	
+	public int searchAccount(AccountPaperVo accountPaper) {
+		int result = -1;
+		for(int i=0; i<accountList.length; i++) {
+			AccountVo account = accountList[i];
+			boolean check1 = account.getName().equals(accountPaper.getName());
+			boolean check2 = account.getAccountNumber().equals(accountPaper.getAccountNumber());
+			boolean check3 = account.getPassword().equals(accountPaper.getPassword());
+			boolean check4 = accountList[i].getMoney()>=accountPaper.getMoney();
+			if(check1 && check2 && check3 && check4) {
+				result = i;
+				break;
+			} 
+		}
+		return result;
+	}
 	
+	public void confirmBalace(AccountPaperVo accountPaper) {
+		int result = -1;
+		for(int i=0; i<accountList.length; i++) {
+			AccountVo account = accountList[i];
+			boolean check1 = account.getName().equals(accountPaper.getName());
+			boolean check2 = account.getAccountNumber().equals(accountPaper.getAccountNumber());
+			boolean check3 = account.getPassword().equals(accountPaper.getPassword());
+			if(check1 && check2 && check3) {
+				result = i;
+				break;
+			} else {
+				System.out.println("[BankSystem] 일치하는 고객정보가 없습니다.");
+			}
+		}
+		if(result != 1) {
+			System.out.println("----------------------------------------------------------------------");
+			System.out.print(accountList[result].getName() + "\t");
+			System.out.print(accountList[result].getAccountNumber() + "\t");
+			System.out.print(accountList[result].getPassword() + "\t");
+			System.out.print(accountList[result].getMoney() + "\n");
+			System.out.println("----------------------------------------------------------------------");
+		}
+		
+	}
 }
