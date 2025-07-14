@@ -20,6 +20,10 @@ public class InheritanceTest2 {
 		greenT.draw();
 		System.out.println("greenT.getArea : " + greenT.getArea());
 		
+		Test2 test = new Test2("홍길동");
+		System.out.println(test.name);
+//		Test1 test1 = new Test1();		//추상 클래스는 객체 생성 안됌
+
 	}
 
 }
