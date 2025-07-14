@@ -1,15 +1,12 @@
 package chapter08;
 
-public class Circle extends Shape{
-	String color;
+public class Circle extends Shape implements ShapeInterface{
+//	String color;
 	double redius;
 	public static final double PI = 3.14;
 	
-	public Circle() {
-		
-	}
 	public Circle(String color, double redius) {
-		this.color = color;
+		super(color);
 		this.redius = redius;
 	}
 	

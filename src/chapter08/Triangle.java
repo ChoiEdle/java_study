@@ -1,14 +1,11 @@
 package chapter08;
 
-public class Triangle extends Shape {
-	String color;
+public class Triangle extends Shape implements ShapeInterface {
+//	String color;
 	double width, height;
 	
-	public Triangle() {
-		
-	}
 	public Triangle(String color, double width, double height) {
-		this.color = color;
+		super(color);
 		this.width = width;
 		this.height = height;
 	}

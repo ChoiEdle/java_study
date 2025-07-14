@@ -1,14 +1,11 @@
 package chapter08;
 
-public class Rectangle extends Shape {
-	String color;
+public class Rectangle extends Shape implements ShapeInterface {
+//	String color;
 	int width, height;
 	
-	public Rectangle() {
-		
-	}
 	public Rectangle(String color, int width, int height) {
-		this.color = color;
+		super(color);
 		this.width = width;
 		this.height = height;
 	}
