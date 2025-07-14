@@ -21,6 +21,8 @@ abstract public class Client {
 	//부모가 가진 printInfo() 메소드를 강제적으로 상속함
 	//오버라이드되는 메소드는 body가 없이 이름만 선언됨
 	//body가 없는 메소드를 추상(abstract)메소드 라고 명명함
-	abstract public void printInfo(); 		
+	abstract public void printInfo();
+	abstract public void register();
+	abstract public void payment();
 	
 }
