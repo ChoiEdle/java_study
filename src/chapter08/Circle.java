@@ -10,8 +10,8 @@ public class Circle extends Shape{
 		this.color = color;
 	}
 	
-	
+	@Override
 	public void draw() {
-		
+		System.out.println(color + " 원을 그린다.");
 	}
 }
