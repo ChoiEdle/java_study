@@ -33,7 +33,7 @@ public class ObjectTypeCastingTest {
 		//상속받은 인터페이스 통한 객체 생성
 		ShapeInterface siR = new Rectangle("하양", 1, 5);
 		ShapeInterface siT = new Triangle("검정", 2, 3);
-//		(추상메소드)			 (상속받아 오버 라이딩)
+//		(추상메소드) --다형성 구현-- (상속받아 오버 라이딩)
 		
 		siR.draw();
 		System.out.println(siR.getArea());
