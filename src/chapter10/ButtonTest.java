@@ -44,7 +44,7 @@ public class ButtonTest {
 			}
 		});
 		
-		//버튼의 이벤트 처리3 - 람다식(자바 버전 8이상) 처리방식을 이용한 이벤트 처리
+//		//버튼의 이벤트 처리3 - 람다식(자바 버전 8이상) 처리방식을 이용한 이벤트 처리
 //		btnClick3.addActionListener((ActionEvent e) -> {
 //			System.out.println("버튼 3");
 //		});
