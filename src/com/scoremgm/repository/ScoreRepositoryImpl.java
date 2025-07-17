@@ -12,7 +12,21 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 	//ConStructor
 	
 	//Method
-	public void insert(Member member) {
-		
+	@Override
+	public boolean insert(Member member) {
+		if(member == null) {
+			return false;
+		}
+		return storage.add(member);
+	}
+	
+	@Override
+	public int getCount() {
+		return storage.size();
+	}
+	
+	@Override
+	public List<Member> findAll(){
+		return storage;
 	}
 }

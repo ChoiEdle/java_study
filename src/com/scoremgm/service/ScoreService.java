@@ -7,4 +7,5 @@ public interface ScoreService {
 	public void update();
 	public void delete();
 	public void exit();
+	public int getCount();
 }

@@ -10,7 +10,7 @@ import com.scoremgm.service.ScoreServiceImpl;
  */
 public class ScoreMgmSystem {
 	//Field
-	Scanner scan;
+	public Scanner scan;
 	ScoreService service;
 	public static final int REGISTER = 1;
 	public static final int LIST = 2;
@@ -22,7 +22,7 @@ public class ScoreMgmSystem {
 	//Constructor
 	public ScoreMgmSystem() {
 		scan = new Scanner(System.in);
-		service = new ScoreServiceImpl(scan);
+		service = new ScoreServiceImpl(this);
 		showMenu();
 		selectMenu();
 	}
@@ -64,11 +64,14 @@ public class ScoreMgmSystem {
 		}
 	}
 	
+	
 	/**
 	 * 메뉴 출력
 	 */
 	public void showMenu() {
 		System.out.println("===== 학생 성적 관리 시스템 =====");
+		System.out.println("전체 학생수 : " + service.getCount());
+		System.out.println("============================");
 		System.out.println("1. 등록");
 		System.out.println("2. 조회");
 		System.out.println("3. 검색");
