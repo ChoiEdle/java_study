@@ -99,9 +99,32 @@ public class ScoreServiceImpl implements ScoreService {
 //		}
 	}
 	
-	@Override
+	/**
+	 * 검색 : 학번 기준
+	 */
+	@Override		
 	public void search() {
-		
+		if(getCount() != 0) {
+			System.out.print("학번 > ");
+			String no = scan.next();
+//			List<Member> list = repository.findAll();
+//			System.out.println("====================================================");
+//			System.out.println("학번\t\t이름\t전공\t국어\t영어\t수학");
+//			System.out.println("====================================================");
+//			list.forEach((member) -> {
+//				System.out.print(member.getNo() + " \t");
+//				System.out.print(member.getName() + " \t");
+//				System.out.print(member.getDepartment() + " \t");
+//				System.out.print(member.getKor() + " \t");
+//				System.out.print(member.getEng() + " \t");
+//				System.out.print(member.getMath() + " \n");
+//			});
+//			System.out.println("====================================================");
+		} else {
+			System.out.println("=> 등록된 학생이 없습니다.");
+		}
+		sms.showMenu();
+		sms.selectMenu();
 	}
 	
 	@Override
