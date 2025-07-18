@@ -115,7 +115,7 @@ public class DefaultBookService implements BookService {
 			System.out.println("[도서 목록 조회]");
 			System.out.println("-----------------------------------------");
 			List<Book> library = repository.selectAll();
-			library.forEach(book -> {
+			library.forEach(book -> {		//list라서 forEach 메소드를 사용 할 수 있음
 				System.out.print("[" + book.getId() + "]\t");
 				System.out.print(book.getName() + " - ");
 				System.out.print(book.getAuthor() + ", \t");

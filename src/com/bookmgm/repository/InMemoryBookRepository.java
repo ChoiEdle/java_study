@@ -46,6 +46,13 @@ public class InMemoryBookRepository implements BookRepository {
 	public void update(Book book) {
 		if(book != null) {
 			int idx = -1;
+//			for(int i=0; i<library.size(); i++) {		//이건 내가 만든거
+//				Book b = library.get(i);
+//				if(b.getId().equals(book.getId())) {
+//					library.set(i, book);
+//					break;
+//				}
+//			}
 			int i = 0;
 			for(Book b : library) {
 				if(b.getId().equals(book.getId())) {
