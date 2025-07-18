@@ -5,8 +5,10 @@ import java.util.Random;
 
 import com.bookmgm.application.BookManagementApplication;
 import com.bookmgm.model.Book;
+import com.bookmgm.repository.AladinBookRepository;
 import com.bookmgm.repository.BookRepository;
 import com.bookmgm.repository.InMemoryBookRepository;
+import com.bookmgm.repository.Yes24BookRepository;
 
 public class DefaultBookService implements BookService {
 	//Field
@@ -20,6 +22,7 @@ public class DefaultBookService implements BookService {
 	
 	public DefaultBookService(BookManagementApplication bma) {
 		this.bma = bma;
+		selectRepository();
 //		repository = new InMemoryBookRepository();
 	}
 
@@ -61,10 +64,31 @@ public class DefaultBookService implements BookService {
 		return book;
 	}
 	
+	/**
+	 * 도서관 선택
+	 */
+	public void selectRepository() {
+		System.out.println("-----------------------------------------");
+		System.out.println("1. 교육센터\t2. 알라딘\t3. 예스24");
+		System.out.println("-----------------------------------------");
+		System.out.println("도서관 선택 > ");
+		int rno = bma.scan.nextInt();
+		if(rno == 1) {
+			repository = new InMemoryBookRepository();
+		} else if(rno == 2) {
+			repository = new AladinBookRepository();
+		} else if(rno == 3) {
+			repository = new Yes24BookRepository();
+		} else {
+			System.out.println("등록된 도서관이 없습니다.");
+			selectRepository();
+		}
+		
+	}
 	
 	@Override
 	public void register() {
-		
+//		selectRepository();
 		Book book = createBook();
 		if(repository.insert(book)) {
 			//등록 성공

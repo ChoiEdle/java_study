@@ -11,6 +11,9 @@ public class AladinBookRepository implements BookRepository {
 	List<Book> library = new ArrayList<Book>();
 	
 	//Constructor
+	public AladinBookRepository() {
+		System.out.println("** 알라딘 도서관 생성 완료 **");
+	}
 	
 	//Method
 	@Override

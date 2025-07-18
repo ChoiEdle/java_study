@@ -11,6 +11,9 @@ public class InMemoryBookRepository implements BookRepository {
 	List<Book> library = new ArrayList<Book>();
 	
 	//Constructor
+	public InMemoryBookRepository() {
+		System.out.println("** 교육센터 도서관 생성 완료 **");
+	}
 	
 	//Method
 	@Override
