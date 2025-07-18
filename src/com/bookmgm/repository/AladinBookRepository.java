@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.bookmgm.model.Book;
 
-public class InMemoryBookRepository implements BookRepository {
+public class AladinBookRepository implements BookRepository {
 	//Field
 	List<Book> library = new ArrayList<Book>();
 	
