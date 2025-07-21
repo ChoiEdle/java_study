@@ -16,12 +16,13 @@ public class Server {
 	public static ArrayList<ClientHandler> list = new ArrayList<ClientHandler>();
 
 	public static void main(String[] args) {
+		boolean flag = true;
 		try {
 			ServerSocket server = new ServerSocket(PORT);
 			System.out.println("서버 실행 중 : " + PORT);
 			System.out.println("클라이언트 접속 대기 중~");
 			
-			while(true) {
+			while(flag) {
 				Socket s = server.accept();		//클라이언트 접속 대기 중
 				System.out.println("클라이언트 접속!!");
 				
@@ -30,6 +31,7 @@ public class Server {
 				list.add(ch);
 				ch.start();
 			}
+			server.close();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

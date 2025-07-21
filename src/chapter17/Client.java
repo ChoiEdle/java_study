@@ -76,6 +76,7 @@ public class Client {
 						System.out.println("-- 클라이언트 종료 --");
 						output.writeUTF("exit");
 						System.exit(0);
+						s.close();				//없어도 되긴 하는데 노란불 들어오는거 보기 싫어서 추가, 있으나 마나한 메소드
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
