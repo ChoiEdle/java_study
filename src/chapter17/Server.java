@@ -67,15 +67,16 @@ class ClientHandler extends Thread {
 					//while문 빠져나가서 스레드 종료하기
 					flag = false;
 					//list에 추가됬던 스레드도 삭제
-					Iterator<ClientHandler> l = Server.list.iterator();
-					while(l.hasNext()) {
-						if(l.next().equals(this)) {		//종료한다는건 본인이니깐 list에서 본인과 같은 object 찾기
-							l.remove();			//동일하면 list에서 제거
-							break;
-						}
-					}
+					Server.list.remove(this);	//이거 한줄이면 되는거였네 ㅋㅋㅋㅋㅋ
+//					Iterator<ClientHandler> l = Server.list.iterator();		//개잘했네 ㅋㅋ 했는데 위에 한줄이면 되는거였음 ㅋㅋ...
+//					while(l.hasNext()) {
+//						if(l.next().equals(this)) {		//종료한다는건 본인이니깐 list에서 본인과 같은 object 찾기
+//							l.remove();			//동일하면 list에서 제거
+//							break;
+//						}
+//					}
 //					for(int i=0; i<Server.list.size(); i++) {	//이거는 Iterator 안쓰고 그냥 remove 사용
-//						if(this.equals(Server.list.get(i))) {
+//						if(this.equals(Server.list.get(i))) {	//종료하는건 본인이니 this
 //							Server.list.remove(i);
 //							break;
 //						}
