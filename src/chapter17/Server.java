@@ -67,7 +67,7 @@ class ClientHandler extends Thread {
 					//while문 빠져나가서 스레드 종료하기
 					flag = false;
 					//list에 추가됬던 스레드도 삭제
-					Server.list.remove(this);	//이거 한줄이면 되는거였네 ㅋㅋㅋㅋㅋ
+					Server.list.remove(this);	//이거 한줄이면 되는거였네 ㅋㅋㅋㅋㅋ 본인이 빠지면 되는 것
 //					Iterator<ClientHandler> l = Server.list.iterator();		//개잘했네 ㅋㅋ 했는데 위에 한줄이면 되는거였음 ㅋㅋ...
 //					while(l.hasNext()) {
 //						if(l.next().equals(this)) {		//종료한다는건 본인이니깐 list에서 본인과 같은 object 찾기
