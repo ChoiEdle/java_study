@@ -4,6 +4,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * 멀티 채팅 서버 구현
@@ -11,6 +13,7 @@ import java.net.Socket;
 public class Server {
 	
 	public final static int PORT = 9000;
+	public static ArrayList<ClientHandler> list = new ArrayList<ClientHandler>();
 
 	public static void main(String[] args) {
 		try {
@@ -23,7 +26,9 @@ public class Server {
 				System.out.println("클라이언트 접속!!");
 				
 				//클라이언트 별로 접속하고 별도 종료 진행
-				new ClientHandler(s).start();;
+				ClientHandler ch = new ClientHandler(s);
+				list.add(ch);
+				ch.start();
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -44,6 +49,8 @@ class ClientHandler extends Thread {
 			this.s = s;
 			this.output = new DataOutputStream(s.getOutputStream());	//전송
 			this.input = new DataInputStream(s.getInputStream());	//수신
+			String str = "[서버] 환영합니다~ ";
+			output.writeUTF(str);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,11 +58,36 @@ class ClientHandler extends Thread {
 	
 	public void run() {
 		try {
-			String str = "[서버] 환영합니다~ ";
-			output.writeUTF(str);
-			
-			String recievedMsg = input.readUTF();
-			System.out.println(recievedMsg);
+			boolean flag = true;
+			while(flag) {
+				String recievedMsg = input.readUTF();
+				if(recievedMsg.equals("exit")) {
+					flag = false;
+					//클라이언트에서 접속 종료하면 while문 빠져나가는 것도 나가는건데 list에 추가됬던 스레드도 삭제
+					Iterator<ClientHandler> l = Server.list.iterator();
+					while(l.hasNext()) {
+						if(l.next().equals(this)) {
+							l.remove();
+							break;
+						}
+					}
+//					for(int i=0; i<Server.list.size(); i++) {	//이거는 Iterator 안쓰고 그냥 remove 사용
+//						if(this.equals(Server.list.get(i))) {
+//							Server.list.remove(i);
+//							break;
+//						}
+//					}
+				} else {
+//					output.writeUTF("[서버] " + recievedMsg);	//현재 접속한 클라이언트에게만 전송
+					Server.list.forEach(ch -> {
+						try {
+							ch.output.writeUTF(recievedMsg);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					});
+				}//else
+			}//while
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
