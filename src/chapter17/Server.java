@@ -1,7 +1,7 @@
 package chapter17;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -36,14 +36,14 @@ public class Server {
 
 class ClientHandler extends Thread {
 	Socket s;
-	OutputStream output;
-	InputStream input;
+	DataOutputStream output;
+	DataInputStream input;
 	
 	public ClientHandler(Socket s) {
 		try {
 			this.s = s;
-			this.output = s.getOutputStream();
-			this.input = s.getInputStream();
+			this.output = new DataOutputStream(s.getOutputStream());	//전송
+			this.input = new DataInputStream(s.getInputStream());	//수신
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,8 +51,11 @@ class ClientHandler extends Thread {
 	
 	public void run() {
 		try {
-			String str = "안녕하세요~";
-			output.write(str.getBytes());
+			String str = "[서버] 환영합니다~ ";
+			output.writeUTF(str);
+			
+			String recievedMsg = input.readUTF();
+			System.out.println(recievedMsg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
