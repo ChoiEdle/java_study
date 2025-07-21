@@ -64,12 +64,13 @@ class ClientHandler extends Thread {
 			while(flag) {
 				String recievedMsg = input.readUTF();
 				if(recievedMsg.equals("exit")) {
+					//while문 빠져나가서 스레드 종료하기
 					flag = false;
-					//클라이언트에서 접속 종료하면 while문 빠져나가는 것도 나가는건데 list에 추가됬던 스레드도 삭제
+					//list에 추가됬던 스레드도 삭제
 					Iterator<ClientHandler> l = Server.list.iterator();
 					while(l.hasNext()) {
-						if(l.next().equals(this)) {
-							l.remove();
+						if(l.next().equals(this)) {		//종료한다는건 본인이니깐 list에서 본인과 같은 object 찾기
+							l.remove();			//동일하면 list에서 제거
 							break;
 						}
 					}
