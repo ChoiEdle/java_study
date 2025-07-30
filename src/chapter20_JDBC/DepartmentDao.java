@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDao {
+public class DepartmentDao {
 	//Field
 	private String url = "jdbc:mysql://localhost:3306/hrdb2019";
 	private String user = "root";
@@ -18,7 +18,7 @@ public class EmployeeDao {
 	ResultSet rs;
 	
 	//Constructor
-	public EmployeeDao() {
+	public DepartmentDao() {
 		//1, 2단계
 		try {
 			connection = DriverManager.getConnection(url, user, password);
@@ -41,23 +41,23 @@ public class EmployeeDao {
 	}
 	
 	//3단계 : CRUD 기능에 따라 메소드 생성
-	public List<EmployeeVo> getList() {
-		List<EmployeeVo> list = new ArrayList<EmployeeVo>();
+	public List<DepartmentVo> getList() {
+		List<DepartmentVo> list = new ArrayList<DepartmentVo>();
 		String sql = """
-				select emp_id, emp_name, hire_date, Salary 
-				from employee
+				select dept_id, dept_name, unit_id, start_date 
+				from department
 				""";
 		try {
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
 				//rs 객체의 1 row --> EmployeeVo 저장
-				EmployeeVo employee = new EmployeeVo();
-				employee.setEmpId(rs.getString(1));
-				employee.setEmpName(rs.getString(2));
-				employee.setHireDate(rs.getString(3));
-				employee.setSalary(rs.getInt(4));
+				DepartmentVo department = new DepartmentVo();
+				department.setDeptId(rs.getString(1));
+				department.setDeptName(rs.getString(2));
+				department.setUnitId(rs.getString(3));
+				department.setStartDate(rs.getString(4));
 
-				list.add(employee);
+				list.add(department);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,18 +75,6 @@ public class EmployeeDao {
 			e.printStackTrace();
 		}
 	}
-	
-	
+		
+		
 }
-
-
-
-
-
-
-
-
-
-
-
-
