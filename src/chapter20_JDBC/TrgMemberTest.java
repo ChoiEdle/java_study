@@ -32,7 +32,7 @@ public class TrgMemberTest {
 //			});
 //		}
 		
-		if(dao.update("김유신", "M0001")) {
+		if(dao.update("김유신", "M0004")) {
 			List<TrgMemberVo> list = dao.getListAll();
 			list.forEach((trg) -> {
 				System.out.print(trg.getRno() + "\t");
