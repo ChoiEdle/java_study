@@ -6,7 +6,6 @@ public class DepartmentTest {
 
 	public static void main(String[] args) {
 		DepartmentDao dao = new DepartmentDao();
-		dao.getStatement();
 		List<DepartmentVo> list = dao.getList();
 		
 		list.forEach((department) -> {
