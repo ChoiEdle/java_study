@@ -12,17 +12,27 @@ public class TrgMemberTest {
 		vo.setMid("M0005");
 		vo.setName("송길동");
 		
-		if(dao.insert(vo)) {
-			List<TrgMemberVo> list = dao.getListAll();
-			list.forEach((trg) -> {
-				System.out.print(trg.getRno() + "\t");
-				System.out.print(trg.getMid() + "\t");
-				System.out.print(trg.getName() + "\t");
-				System.out.print(trg.getMdate() + "\n");
-			});
-		}
+//		if(dao.insert(vo)) {
+//			List<TrgMemberVo> list = dao.getListAll();
+//			list.forEach((trg) -> {
+//				System.out.print(trg.getRno() + "\t");
+//				System.out.print(trg.getMid() + "\t");
+//				System.out.print(trg.getName() + "\t");
+//				System.out.print(trg.getMdate() + "\n");
+//			});
+//		}
+//		
+//		if(dao.delete(dmid)) {
+//			List<TrgMemberVo> list = dao.getListAll();
+//			list.forEach((trg) -> {
+//				System.out.print(trg.getRno() + "\t");
+//				System.out.print(trg.getMid() + "\t");
+//				System.out.print(trg.getName() + "\t");
+//				System.out.print(trg.getMdate() + "\n");
+//			});
+//		}
 		
-		if(dao.delete(dmid)) {
+		if(dao.update("김유신", "M0001")) {
 			List<TrgMemberVo> list = dao.getListAll();
 			list.forEach((trg) -> {
 				System.out.print(trg.getRno() + "\t");

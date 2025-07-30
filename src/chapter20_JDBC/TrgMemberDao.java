@@ -31,8 +31,30 @@ public class TrgMemberDao extends DBConn {
 			e.printStackTrace();
 		}
 		return result;
+	}	
+	
+	//수정(혼자만듬) 	//더 많은걸 수정하려고했는데 수정 되는게 이름 밖에 없네 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+	public boolean update(String name, String mid) {
+		boolean result = false;
+		String sql = """
+				update trg_member
+				set name = ?
+				where mid = ?
+				""";
+		try {
+			getPreparedStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, mid);
+			
+			int rows = pstmt.executeUpdate();
+			if(rows == 1) result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
+	//추가
 	public boolean insert(TrgMemberVo trgmember) {
 		boolean result = false;
 		String sql = """
@@ -52,6 +74,7 @@ public class TrgMemberDao extends DBConn {
 		return result;
 	}
 	
+	//List 생성
 	public List<TrgMemberVo> getListAll() {
 		List<TrgMemberVo> list = new ArrayList<TrgMemberVo>();
 		String sql = """
