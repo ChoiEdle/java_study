@@ -1,29 +1,49 @@
 package com.scoremgm.model;
 
-public class Member {
+public class MemberVo {
 	//Field
-	private String no;
+	private int rno;
+	private String mid;
 	private String name;
 	private String department;
 	private int kor;
 	private int eng;
 	private int math;
+	private String mdate;
 	
-	
+
+
 	//Constructor
-	public Member() {
+	public MemberVo() {
 		
 	}
 
 
 	//Method
-	public String getNo() {
-		return no;
+	public String getMdate() {
+		return mdate;
+	}
+	
+	public void setMdate(String mdate) {
+		this.mdate = mdate;
+	}
+
+	public int getRno() {
+		return rno;
+	}
+	
+	
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
+	
+	public String getMid() {
+		return mid;
 	}
 
 
-	public void setNo(String no) {
-		this.no = no;
+	public void setMid(String mid) {
+		this.mid = mid;
 	}
 
 

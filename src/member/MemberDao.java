@@ -5,7 +5,7 @@ import java.util.List;
 
 import db.DBConn;
 
-public class MemberDao extends DBConn implements MemberInterface {
+public class MemberDao extends DBConn implements GenericInterface<MemberVo> {
 	//Field
 	
 	
@@ -133,16 +133,45 @@ public class MemberDao extends DBConn implements MemberInterface {
 	 * 데이터 수정
 	 */
 	@Override
-	public int update(MemberVo memberVo) {
-		return 0;
+	public int update(MemberVo member) {
+		int rows = 0;
+		String sql = """
+				update member
+				set name = ?, email = ?
+				where member_id = ?
+				""";
+		try {
+			getPreparedStatement(sql);
+			pstmt.setString(1, member.getName());
+			pstmt.setString(2, member.getEmail());
+			pstmt.setInt(3, member.getMemberId());
+			
+			rows = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rows;
 	}
 	
 	/**
 	 * 데이터 삭제
 	 */
 	@Override
-	public int delete(int memberID) {
-		return 0;
+	public int delete(int memberId) {
+		int rows = 0;
+		String sql = """
+				delete from member
+				where member_id = ?
+				""";
+		try {
+			getPreparedStatement(sql);
+			pstmt.setInt(1, memberId);
+			
+			rows = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rows;
 	}
 	
 	
