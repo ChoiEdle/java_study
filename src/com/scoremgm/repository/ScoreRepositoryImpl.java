@@ -20,23 +20,77 @@ public class ScoreRepositoryImpl extends DBConn implements GenericRepositoryInte
 	
 	//Method
 	@Override
-	public boolean insert(MemberVo member) {
-		if(member == null) {
-			return false;
+	public int insert(MemberVo member) {
+		int rows = 0;
+		String sql = """
+				insert into score_member(name, department, kor, eng, math, mdate)
+				values(?, ?, ?, ?, ?, now())
+				""";
+		try {
+			getPreparedStatement(sql);
+			pstmt.setString(1, member.getName());
+			pstmt.setString(2, member.getDepartment());
+			pstmt.setInt(3, member.getKor());
+			pstmt.setInt(4, member.getEng());
+			pstmt.setInt(5, member.getMath());
+			
+			rows = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return storage.add(member);
+		
+		return rows;
 	}
 	
-//	@Override
-//	public int getCount() {
-//		return storage.size();
-//	}
-//	
-//	@Override
-//	public List<MemberVo> findAll(){
-//		return storage;
-//	}
-//	
+	@Override
+	public int getCount() {
+		int rows = 0;
+		String sql = """
+				select count(*) from score_member
+				""";
+		try {
+			getPreparedStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				rows = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rows;
+	}
+	
+	@Override
+	public List<MemberVo> findAll(){
+		List<MemberVo> list = new ArrayList<MemberVo>();
+		String sql = """
+				select row_number() over(),
+				mid, name, department, kor, eng, math, mdate
+				from score_member
+				""";
+		try {
+			getPreparedStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				MemberVo member = new MemberVo();
+				member.setRno(rs.getInt(1));
+				member.setMid(rs.getString(2));
+				member.setName(rs.getString(3));
+				member.setDepartment(rs.getString(4));
+				member.setKor(rs.getInt(5));
+				member.setEng(rs.getInt(6));
+				member.setMath(rs.getInt(7));
+				member.setMdate(rs.getString(8));
+				
+				list.add(member);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
 //	@Override
 //	public MemberVo find(String no) {
 //		no = "2025-" + no;
