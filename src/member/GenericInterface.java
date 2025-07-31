@@ -9,5 +9,4 @@ public interface GenericInterface<T> {
 	public List<T> search(String name);
 	public int update(T entity);
 	public int delete(int id);
-	
 }

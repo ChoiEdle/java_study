@@ -212,6 +212,7 @@ public class ScoreServiceImpl implements ScoreService {
 	@Override
 	public void exit() {
 		System.out.println("=> 프로그램 종료!!");
+		repository.close();
 		System.exit(0);
 	}
 	

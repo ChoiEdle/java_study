@@ -9,4 +9,5 @@ public interface GenericRepositoryInterface<T> {
 	T find(String id);
 	int update(T entity);
 	int remove(String no);
+	void close();
 }
