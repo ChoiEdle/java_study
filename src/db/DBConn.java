@@ -22,7 +22,7 @@ public class DBConn {
 		//1단계
 		try {
 			connection = DriverManager.getConnection(url, user, password);
-			System.out.println("----->> 1단계 성공!");
+//			System.out.println("----->> 1단계 성공!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -33,7 +33,7 @@ public class DBConn {
 	public void getPreparedStatement(String sql) {
 		try {
 			pstmt = connection.prepareStatement(sql);
-			System.out.println("----->> 2단계 성공!(PreparedStatement)");
+//			System.out.println("----->> 2단계 성공!(PreparedStatement)");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,7 +45,7 @@ public class DBConn {
 		//2단계 : Statement 객체 생성
 		try {
 			stmt = connection.createStatement();
-			System.out.println("----->> 2단계 성공(Statement)!");
+//			System.out.println("----->> 2단계 성공(Statement)!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
