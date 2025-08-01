@@ -12,6 +12,7 @@ create table book_aladin(
     bdate	date
 );
 
+-- ********************************************************* 아이디만들어주는 트리거
 -- trigger 생성 : 여러개의 sql문 포함
 delimiter $$
 
@@ -31,6 +32,7 @@ set new.bid = concat('B', lpad(max_code + 1, 3, '0'));
 
 end $$
 delimiter ;
+-- *********************************************************
 
 desc book_tj;
 select * from book_aladin;
