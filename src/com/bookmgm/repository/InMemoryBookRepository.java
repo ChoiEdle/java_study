@@ -10,6 +10,7 @@ import db.GenericRepositoryInterface;
 
 public class InMemoryBookRepository extends DBConn implements GenericRepositoryInterface<Book> {
 	//Field
+	String library;
 	
 	//Constructor
 	public InMemoryBookRepository() {
@@ -17,14 +18,17 @@ public class InMemoryBookRepository extends DBConn implements GenericRepositoryI
 		System.out.println("** 교육센터 도서관 생성 완료 **");
 	}
 	
+	public InMemoryBookRepository(String library) {
+		super();
+		this.library = library;
+		System.out.println("** 도서관 생성 완료 **");
+	}
+	
 	//Method
 	@Override
 	public int insert(Book book) {
 		int rows = 0;
-		String sql = """
-				insert into book_tj(title, author, price, isbn, bdate)
-				values(?, ?, ?, floor(rand()*10000),curdate())
-				""";
+		String sql = "insert into " + library + "(title, author, price, isbn, bdate) values(?, ?, ?, floor(rand()*10000),curdate())";
 		try {
 			getPreparedStatement(sql);
 			pstmt.setString(1, book.getTitle());
@@ -43,8 +47,8 @@ public class InMemoryBookRepository extends DBConn implements GenericRepositoryI
 		List<Book> list = new ArrayList<Book>();
 		String sql = """
 				select bid, title, author, price, isbn, bdate
-				from book_tj
-				""";
+				from 
+				""" + library;
 		try {
 			getPreparedStatement(sql);
 			rs = pstmt.executeQuery();
@@ -68,11 +72,7 @@ public class InMemoryBookRepository extends DBConn implements GenericRepositoryI
 	@Override
 	public Book find(String id) {
 		Book book = null;
-		String sql = """
-				select bid, title, author, price, isbn, bdate
-				from book_tj
-				where bid = ?
-				""";
+		String sql = "select bid, title, author, price, isbn, bdate from " + library + " where bid = ?";
 		try {
 			getPreparedStatement(sql);
 			pstmt.setString(1, id);
@@ -95,11 +95,7 @@ public class InMemoryBookRepository extends DBConn implements GenericRepositoryI
 	@Override
 	public int update(Book book) {
 		int rows = 0;
-		String sql = """
-				update book_tj
-				set title = ?, author = ?, price = ?
-				where bid = ?
-				""";
+		String sql = "update " + library + " set title = ?, author = ?, price = ? where bid = ?";
 		try {
 			getPreparedStatement(sql);
 			pstmt.setString(1, book.getTitle());
@@ -117,10 +113,7 @@ public class InMemoryBookRepository extends DBConn implements GenericRepositoryI
 	@Override
 	public int remove(String id) {
 		int rows = 0;
-		String sql = """
-				delete from book_tj
-				where bid = ?
-				""";
+		String sql = "delete from " + library + "	where bid = ?";
 		try {
 			getPreparedStatement(sql);
 			pstmt.setString(1, id);
@@ -134,18 +127,17 @@ public class InMemoryBookRepository extends DBConn implements GenericRepositoryI
 	@Override
 	public int getCount(){
 		int rows = 0;
-		String sql = """
-				select count(*) from book_tj
-				""";
+		String sql = "select count(*) as count from " + library;
 		try {
 			getPreparedStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				rows = rs.getInt(1);
+				rows = rs.getInt("count");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return rows;
 	}
+
 }

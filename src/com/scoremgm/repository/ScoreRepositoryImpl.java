@@ -156,8 +156,4 @@ public class ScoreRepositoryImpl extends DBConn implements GenericRepositoryInte
 		return rows;
 	}
 	
-	@Override
-	public void close() {
-		super.close();
-	}
 }

@@ -2,6 +2,7 @@ package com.bookmgm.model;
 
 public class Book {
 	//Field
+	private int rno;
 	private String bid;
 	private String title;
 	private String author;
@@ -13,17 +14,11 @@ public class Book {
 	
 	
 	//Method
-	public String getBdate() {
-		return bdate;
+	public int getRno() {
+		return rno;
 	}
-	public void setBdate(String bdate) {
-		this.bdate = bdate;
-	}
-	public int getIsbn() {
-		return isbn;
-	}
-	public void setIsbn(int isbn) {
-		this.isbn = isbn;
+	public void setRno(int rno) {
+		this.rno = rno;
 	}
 	public String getBid() {
 		return bid;
@@ -43,10 +38,22 @@ public class Book {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+	public String getBdate() {
+		return bdate;
+	}
+	public void setBdate(String bdate) {
+		this.bdate = bdate;
+	}
 	public int getPrice() {
 		return price;
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public int getIsbn() {
+		return isbn;
+	}
+	public void setIsbn(int isbn) {
+		this.isbn = isbn;
 	}
 }

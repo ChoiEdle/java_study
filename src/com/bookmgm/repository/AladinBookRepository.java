@@ -10,26 +10,46 @@ import db.GenericRepositoryInterface;
 
 public class AladinBookRepository extends DBConn implements GenericRepositoryInterface<Book> {
 	//Field
+	String tableName;
+	public static final String TJ = "book_tj";
+	public static final String ALADIN = "book_aladin";
+	public static final String YES24 = "book_yes24";
 	
 	//Constructor
-	public AladinBookRepository() {
+	public AladinBookRepository(int rno) {
 		super();
-		System.out.println("** 알라딘 도서관 생성 완료 **");
+		createTitle(rno);
 	}
 	
 	//Method
-	@Override
+	public void createTitle(int rno) {
+		String name = null;
+		if(rno == 1) {
+			name = "교육센터";
+			tableName = TJ;
+		}
+		else if(rno == 2) {
+			name = "알라딘";
+			tableName = ALADIN;
+		}
+		else if(rno == 3) {
+			name = "예스24";
+			tableName = YES24;
+		}
+		System.out.println("** " + name + " 도서관 생성 완료 **");
+	}
+	
 	public int insert(Book book) {
 		int rows = 0;
-		String sql = """
-				insert into book_aladin(title, author, price, isbn, bdate)
-				values(?, ?, ?, floor(rand()*10000),curdate())
-				""";
+		String sql = "insert into " + tableName + "(title, author, price, isbn, bdate) "
+				+ " values(?, ?, ?, ?, curdate())";
 		try {
 			getPreparedStatement(sql);
+//			pstmt.setString(1, tableName);
 			pstmt.setString(1, book.getTitle());
 			pstmt.setString(2, book.getAuthor());
 			pstmt.setInt(3, book.getPrice());
+			pstmt.setInt(4, book.getIsbn());
 			
 			rows = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -38,26 +58,42 @@ public class AladinBookRepository extends DBConn implements GenericRepositoryInt
 		return rows;
 	}
 	
-	@Override
-	public List<Book> findAll(){
-		List<Book> list = new ArrayList<Book>();
-		String sql = """
-				select bid, title, author, price, isbn, bdate
-				from book_aladin
-				""";
+	public int getCount() {
+		int rows = 0;
+		String sql = "select count(*) as count from " + tableName;
 		try {
 			getPreparedStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				Book book = new Book();
-				book.setBid(rs.getString(1));
-				book.setTitle(rs.getString(2));
-				book.setAuthor(rs.getString(3));
-				book.setPrice(rs.getInt(4));
-				book.setIsbn(rs.getInt(5));
-				book.setBdate(rs.getString(6));
-				
-				list.add(book);
+				rows = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rows;
+	}
+	
+	public List<Book> findAll() {
+		List<Book> list = null;
+		String sql = "select row_number() over() as rno, bid, title, author, isbn, price, bdate "
+				+ " from " + tableName;
+		try {
+			getPreparedStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs != null) {
+				list = new ArrayList<Book>();
+				while(rs.next()) {
+					Book book = new Book();
+					book.setRno(rs.getInt(1));
+					book.setBid(rs.getString(2));
+					book.setTitle(rs.getString(3));
+					book.setAuthor(rs.getString(4));
+					book.setIsbn(rs.getInt(5));
+					book.setPrice(rs.getInt(6));
+					book.setBdate(rs.getString(7));
+					
+					list.add(book);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,41 +101,33 @@ public class AladinBookRepository extends DBConn implements GenericRepositoryInt
 		return list;
 	}
 	
-	@Override
-	public Book find(String id) {
+	public Book find(String bid) {
 		Book book = null;
-		String sql = """
-				select bid, title, author, price, isbn, bdate
-				from book_aladin
-				where bid = ?
-				""";
+		String sql = "select bid, title, author, isbn, price, bdate "
+				+ " from " + tableName + " where bid = ?";
 		try {
 			getPreparedStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, bid);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				book = new Book();
 				book.setBid(rs.getString(1));
 				book.setTitle(rs.getString(2));
 				book.setAuthor(rs.getString(3));
-				book.setPrice(rs.getInt(4));
-				book.setIsbn(rs.getInt(5));
+				book.setIsbn(rs.getInt(4));
+				book.setPrice(rs.getInt(5));
 				book.setBdate(rs.getString(6));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return book;
+		return  book;
 	}
 	
-	@Override
 	public int update(Book book) {
 		int rows = 0;
-		String sql = """
-				update book_aladin
-				set title = ?, author = ?, price = ?
-				where bid = ?
-				""";
+		String sql = "update " + tableName + " set title = ?, author = ?, price = ? "
+				+ " where bid = ?";
 		try {
 			getPreparedStatement(sql);
 			pstmt.setString(1, book.getTitle());
@@ -111,41 +139,22 @@ public class AladinBookRepository extends DBConn implements GenericRepositoryInt
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return rows;
 	}
 	
-	@Override
-	public int remove(String id) {
+	public int remove(String bid) {
 		int rows = 0;
-		String sql = """
-				delete from book_aladin
-				where bid = ?
-				""";
+		String sql = "delete from " + tableName + " where bid = ?";
 		try {
 			getPreparedStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, bid);
+			
 			rows = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return rows;
-	}
-	
-	@Override
-	public int getCount(){
-		int rows = 0;
-		String sql = """
-				select count(*) from book_aladin
-				""";
-		try {
-			getPreparedStatement(sql);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				rows = rs.getInt(1);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 		return rows;
 	}
 }

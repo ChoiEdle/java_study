@@ -1,12 +1,11 @@
 package com.bookmgm.service;
 
 import java.util.List;
+import java.util.Random;
 
 import com.bookmgm.application.BookManagementApplication;
 import com.bookmgm.model.Book;
 import com.bookmgm.repository.AladinBookRepository;
-import com.bookmgm.repository.InMemoryBookRepository;
-import com.bookmgm.repository.Yes24BookRepository;
 
 import db.GenericRepositoryInterface;
 
@@ -31,7 +30,11 @@ public class DefaultBookService implements BookService {
 	 * 도서 생성
 	 */
 	public Book createBook() {
+		Random rd = new Random();
 		Book book = new Book();
+		
+		book.setIsbn(rd.nextInt(1000,9999));
+		
 		System.out.println("[도서 등록]");
 		System.out.print("도서명 : ");
 		book.setTitle(bma.scan.next());
@@ -69,16 +72,17 @@ public class DefaultBookService implements BookService {
 		System.out.println("-----------------------------------------");
 		System.out.println("도서관 선택 > ");
 		int rno = bma.scan.nextInt();
-		if(rno == 1) {
-			repository = new InMemoryBookRepository();
-		} else if(rno == 2) {
-			repository = new AladinBookRepository();
-		} else if(rno == 3) {
-			repository = new Yes24BookRepository();
-		} else {
-			System.out.println("등록된 도서관이 없습니다.");
-			selectRepository();
-		}
+		repository = new AladinBookRepository(rno);
+//		if(rno == 1) {
+//			repository = new InMemoryBookRepository("book_tj");
+//		} else if(rno == 2) {
+//			repository = new InMemoryBookRepository("book_aladin");
+//		} else if(rno == 3) {
+//			repository = new InMemoryBookRepository("book_yes24");
+//		} else {
+//			System.out.println("등록된 도서관이 없습니다.");
+//			selectRepository();
+//		}
 		
 	}
 	
@@ -205,6 +209,7 @@ public class DefaultBookService implements BookService {
 	@Override
 	public void exit() {
 		System.out.println("✅시스템이 종료됩니다.");
+		repository.close();
 		System.exit(0);
 	}
 	
@@ -228,5 +233,9 @@ public class DefaultBookService implements BookService {
 		System.out.println("-----------------------------------------");
 	}
 	
-	
+	public void libraryChange() {
+		repository.close();
+		selectRepository();
+		bma.showMenu();
+	}
 }

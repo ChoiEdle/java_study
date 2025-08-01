@@ -12,6 +12,7 @@ public class BookManagementApplication {
 	public static final int UPDATE = 4;
 	public static final int DELETE = 5;
 	public static final int EXIT = 6;
+	public static final int CHANGE = 99;
 	public Scanner scan;
 	public BookService service;
 	
@@ -66,6 +67,9 @@ public class BookManagementApplication {
 					break;
 				case EXIT : 
 					service.exit();
+					break;
+				case CHANGE : 
+					service.libraryChange();
 					break;
 				default :
 					System.out.println("=> 메뉴 준비중 입니다.");
