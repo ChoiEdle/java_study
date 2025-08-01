@@ -57,6 +57,7 @@ public class DBConn {
 		try {
 			if(rs != null) rs.close();
 			if(stmt != null) stmt.close();
+			if(pstmt != null) pstmt.close();
 			if(connection != null) connection.close();
 		} catch (Exception e) {
 			e.printStackTrace();

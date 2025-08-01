@@ -126,7 +126,7 @@ public class ScoreRepositoryImpl extends DBConn implements GenericRepositoryInte
 				update score_member
 				set kor = ?, eng = ?, math = ?
 				where mid = ?
-				""";
+				""";		//국,영,수 점수 업데이트
 		try {
 			getPreparedStatement(sql);
 			pstmt.setInt(1, member.getKor());

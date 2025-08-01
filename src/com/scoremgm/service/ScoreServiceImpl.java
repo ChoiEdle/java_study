@@ -159,7 +159,7 @@ public class ScoreServiceImpl implements ScoreService {
 				System.out.println("====================================================");
 				System.out.println("=> 수정 결과");
 				System.out.println("====================================================");
-				System.out.println("학번\t\t이름\t전공\t국어\t영어\t수학");
+				System.out.println("학번\t이름\t전공\t국어\t영어\t수학");
 				System.out.println("====================================================");
 				System.out.print(member.getMid() + " \t");
 				System.out.print(member.getName() + " \t");

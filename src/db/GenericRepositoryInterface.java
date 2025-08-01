@@ -8,6 +8,6 @@ public interface GenericRepositoryInterface<T> {
 	List<T> findAll();
 	T find(String id);
 	int update(T entity);
-	int remove(String no);
+	int remove(String id);
 	void close();
 }
