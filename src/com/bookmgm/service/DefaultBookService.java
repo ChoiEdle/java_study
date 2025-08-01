@@ -116,12 +116,13 @@ public class DefaultBookService implements BookService {
 			System.out.println("-----------------------------------------");
 			List<Book> library = repository.findAll();
 			library.forEach(book -> {		//list라서 forEach 메소드를 사용 할 수 있음
-				System.out.print("[" + book.getBid() + "]\t");
-				System.out.print(book.getTitle() + " - ");
-				System.out.print(book.getAuthor() + ", \t");
-				System.out.print(book.getPrice() + "\t");
-				System.out.print(book.getIsbn() + "\t");
-				System.out.print(book.getBdate() + "\n");
+//				System.out.print("[" + book.getBid() + "]\t");
+//				System.out.print(book.getTitle() + " - ");
+//				System.out.print(book.getAuthor() + ", \t");
+//				System.out.print(book.getPrice() + "\t");
+//				System.out.print(book.getIsbn() + "\t");
+//				System.out.print(book.getBdate() + "\n");
+				printBook(book);
 			});
 //			for(Book list : library) {		//이게 내가 한거
 //				System.out.print("[" + list.getId() + "]\t");
@@ -145,7 +146,9 @@ public class DefaultBookService implements BookService {
 			System.out.print("도서번호 > ");
 			Book book = repository.find(bma.scan.next());
 			if(book != null) {
+				System.out.println("-----------------------------------------");
 				printBook(book);
+				System.out.println("-----------------------------------------");
 			} else {
 				System.out.println("🚫 검색한 도서가 존재하지 않습니다.");
 			}
@@ -170,7 +173,9 @@ public class DefaultBookService implements BookService {
 				int rows = repository.update(createBook(book));
 				if(rows != 0) {
 					System.out.println("✅도서가 수정되었습니다.");
+					System.out.println("-----------------------------------------");
 					printBook(book);
+					System.out.println("-----------------------------------------");
 				} else {
 					System.out.println("✅도서가 수정 실패.");
 				}
@@ -223,14 +228,12 @@ public class DefaultBookService implements BookService {
 	 * @param book
 	 */
 	public void printBook(Book book) {
-		System.out.println("-----------------------------------------");
 		System.out.print("[" + book.getBid() + "]\t");
 		System.out.print(book.getTitle() + " - ");
 		System.out.print(book.getAuthor() + ", \t");
 		System.out.print(book.getPrice() + "\t");
 		System.out.print(book.getIsbn() + "\t");
 		System.out.print(book.getBdate() + "\n");
-		System.out.println("-----------------------------------------");
 	}
 	
 	public void libraryChange() {
