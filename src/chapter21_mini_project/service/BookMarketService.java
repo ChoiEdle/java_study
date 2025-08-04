@@ -20,12 +20,12 @@ public class BookMarketService {
 	}
 	
 	//Method
-	public void info() {
+	public void menuGuestInfo() {
 		System.out.println("현재 고객 정보 : ");
 		System.out.println("이름 " + app.getUserName() + "\t연락처 " + app.getUserPhone());
 	}
 	
-	public void showCart() {
+	public void menuCartItemList() {
 		List<CartVo> list = repository.cartFindAll();
 		System.out.println("------------------------------------------------");
 		System.out.println("도서ID\t\t|\t수량\t|\t합계");
@@ -44,7 +44,7 @@ public class BookMarketService {
 		System.out.println("------------------------------------------------");
 	}
 	
-	public void deleteAll() {
+	public void menuCartClear() {
 		System.out.print("장바구니에 모든 항목을 삭제하겠습니까? Y | N");
 		String anser = app.scan.next();
 		if(anser.equals("Y")) {
@@ -57,7 +57,7 @@ public class BookMarketService {
 		}
 	}
 	
-	public void add() {
+	public void menuCartAddItem() {
 		List<BookVo> list = repository.bookFindAll();
 		BookVo addBook = null;
 		list.forEach(book -> {
@@ -92,8 +92,8 @@ public class BookMarketService {
 		
 	}
 	
-	public void upDown() {
-		showCart();
+	public void menuCartRemoveItemCount() {
+		menuCartItemList();
 		System.out.print("장바구니에서 수량을 변경할 도서의 ID를 입력하세요 : ");
 		String scanId = app.scan.next();
 		
@@ -111,8 +111,8 @@ public class BookMarketService {
 		}
 	}
 	
-	public void delete() {
-		showCart();
+	public void menuCartRemoveItem() {
+		menuCartItemList();
 		System.out.print("장바구니에서 삭제할 도서의 ID를 입력하세요 : ");
 		String scanId = app.scan.next();
 		System.out.print("장바구니의 항목을 삭제하겠습니까? Y | N");
@@ -127,7 +127,7 @@ public class BookMarketService {
 		}
 	}
 	
-	public void receipt() {
+	public void menuCartBill() {
 		System.out.print("배송받을 분은 고객정보와 같습니까? Y | N ");
 		String anser = app.scan.next();
 		if(anser.equals("Y")) {
@@ -137,7 +137,7 @@ public class BookMarketService {
 			System.out.println("고객명 : " + app.getUserName() + "\t\t연락처 : " + app.getUserPhone());
 			System.out.println("배송지 : " + adress + "\t발송일 : ");
 			System.out.println("장바구니 상품 목록 : ");
-			showCart();
+			menuCartItemList();
 		} else if(anser.equals("N")) {
 			System.out.print("배송받을 고객명을 입력하세요 ");
 			String name = app.scan.next();
@@ -149,13 +149,13 @@ public class BookMarketService {
 			System.out.println("고객명 : " + name + "\t\t연락처 : " + phone);
 			System.out.println("배송지 : " + adress + "\t발송일 : ");
 			System.out.println("장바구니 상품 목록 : ");
-			showCart();
+			menuCartItemList();
 		} else {
 			System.out.println("잘못 누르셨습니다.");
 		}
 	}
 	
-	public void exit() {
+	public void menuExit() {
 		System.out.println("프로그램을 종료합니다.");
 		repository.close();
 	}

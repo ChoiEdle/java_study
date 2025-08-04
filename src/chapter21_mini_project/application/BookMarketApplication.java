@@ -59,28 +59,28 @@ public class BookMarketApplication {
 		System.out.print("메뉴 번호를 선택해주세요 ");
 		switch(scan.nextInt()) {
 			case INFO :
-				service.info();
+				service.menuGuestInfo();
 				break;
 			case SHOWCART :
-				service.showCart();
+				service.menuCartItemList();
 				break;
 			case DELETEALL :
-				service.deleteAll();
+				service.menuCartClear();
 				break;
 			case ADD :
-				service.add();
+				service.menuCartAddItem();
 				break;
 			case UPDOWN :
-				service.upDown();
+				service.menuCartRemoveItemCount();
 				break;
 			case DELETE :
-				service.delete();
+				service.menuCartRemoveItem();
 				break;
 			case RECEIPT :
-				service.receipt();
+				service.menuCartBill();
 				break;
 			case EXIT :
-				service.exit();
+				service.menuExit();
 				System.exit(0);
 				break;
 			default :
