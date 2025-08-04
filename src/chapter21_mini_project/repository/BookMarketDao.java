@@ -13,7 +13,6 @@ public class BookMarketDao extends DBConn {
 	//Constructor
 	
 	
-	
 	//Method
 	public List<BookVo> bookFindAll() {
 		List<BookVo> list = new ArrayList<BookVo>();
@@ -148,5 +147,23 @@ public class BookMarketDao extends DBConn {
 			}
 		}
 		return book;
+	}
+	
+	public boolean login(String name, String phone) {
+		boolean result = false;
+		String sql = """
+				select name, phone from book_market_member where name = ? and phone = ?
+				""";
+		try {
+			getPreparedStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, phone);
+			rs = pstmt.executeQuery();
+			
+			result = rs.next();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

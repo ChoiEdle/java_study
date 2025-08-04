@@ -6,13 +6,13 @@ import chapter21_mini_project.service.BookMarketService;
 
 public class BookMarketApplication {
 	//Field
-	public static final int INFO= 1;
-	public static final int SHOWCART = 2;
-	public static final int DELETEALL = 3;
-	public static final int ADD = 4;
-	public static final int UPDOWN = 5;
-	public static final int DELETE = 6;
-	public static final int RECEIPT = 7;
+	public static final int MENUGUESTINFO= 1;
+	public static final int ITEMLIST = 2;
+	public static final int CLEAR = 3;
+	public static final int ADDITEM = 4;
+	public static final int REMOVEITEMCOUNT = 5;
+	public static final int REMOVEITEM = 6;
+	public static final int BILL = 7;
 	public static final int EXIT = 8;
 	public Scanner scan;
 	private String userName;
@@ -24,7 +24,6 @@ public class BookMarketApplication {
 		scan = new Scanner(System.in);
 		service = new BookMarketService(this);
 		login();
-		cycle();
 	}
 	
 	//Method
@@ -38,7 +37,13 @@ public class BookMarketApplication {
 		userName = scan.next();
 		System.out.print("연락처를 입력하세요 : ");
 		userPhone = scan.next();
-		cycle();
+		if(service.login(userName, userPhone)) {
+			System.out.println("로그인 성공!");
+			cycle();
+		} else {
+			System.out.println("로그인 실패! 다시 입력하세요");
+			login();
+		}
 	}
 	
 	public void showMenu() {
@@ -58,25 +63,25 @@ public class BookMarketApplication {
 		System.out.println("*************************************************");
 		System.out.print("메뉴 번호를 선택해주세요 ");
 		switch(scan.nextInt()) {
-			case INFO :
+			case MENUGUESTINFO :
 				service.menuGuestInfo();
 				break;
-			case SHOWCART :
+			case ITEMLIST :
 				service.menuCartItemList();
 				break;
-			case DELETEALL :
+			case CLEAR :
 				service.menuCartClear();
 				break;
-			case ADD :
+			case ADDITEM :
 				service.menuCartAddItem();
 				break;
-			case UPDOWN :
+			case REMOVEITEMCOUNT :
 				service.menuCartRemoveItemCount();
 				break;
-			case DELETE :
+			case REMOVEITEM :
 				service.menuCartRemoveItem();
 				break;
-			case RECEIPT :
+			case BILL :
 				service.menuCartBill();
 				break;
 			case EXIT :

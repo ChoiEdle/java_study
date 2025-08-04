@@ -7,7 +7,10 @@ select database();
     book_market_cart : 장바구니 테이블
     book_market_member : 회원 테이블
 ******************************************/
-
+create table book_market_member(
+	name	varchar(10)	not null,
+    phone	char(13)	not null
+);
 create table book_market_books(
 	bid		char(8)		primary key,
     title	varchar(20)	not null,
@@ -39,5 +42,10 @@ values('ISBN1236', '스크래치', 22000, '고광일', '컴퓨팅 사고력을 �
 select bid, title, price, author, detail, uid, bdate
 from book_market_books;
 
-delete from book_market_cart where *;
+truncate book_market_cart;
+
+update book_market_cart set quantity = 1 where bid = 'ISBN1234';
+select * from book_market_member;
+insert into book_market_member (name, phone)
+values('홍길동','010-1111-1111');
 

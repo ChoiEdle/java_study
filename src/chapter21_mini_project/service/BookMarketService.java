@@ -160,4 +160,8 @@ public class BookMarketService {
 		repository.close();
 	}
 	
+	public boolean login(String name, String phone) {
+		boolean result = repository.login(name, phone);
+		return result;
+	}
 }
