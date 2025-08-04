@@ -27,21 +27,21 @@ public class BookMarketService {
 	
 	public void showCart() {
 		List<CartVo> list = repository.cartFindAll();
-		System.out.println("--------------------------------------------");
+		System.out.println("------------------------------------------------");
 		System.out.println("도서ID\t\t|\t수량\t|\t합계");
 		list.forEach(cartList -> {
 			System.out.print(cartList.getBid() +  "\t|\t");
 			System.out.print(cartList.getQuantity() +  "\t|\t");
 			System.out.print(cartList.getTotalPrice() +  " \n");
 		});
-		System.out.println("--------------------------------------------");
+		System.out.println("------------------------------------------------");
 		int totalPrice = 0;
 		for(int i=0 ; i<list.size() ; i++) {
 			totalPrice += list.get(i).getTotalPrice();
 		}
 		System.out.println("주문 총 금액 : " + totalPrice + "원");
 		System.out.println();
-		System.out.println("--------------------------------------------");
+		System.out.println("------------------------------------------------");
 	}
 	
 	public void deleteAll() {
@@ -133,7 +133,7 @@ public class BookMarketService {
 		if(anser.equals("Y")) {
 			System.out.print("배송지를 입력해주세요 ");
 			String adress = app.scan.next();
-			System.out.println("---------------배송 받을 고객 정보---------------");
+			System.out.println("----------------배송 받을 고객 정보-----------------");
 			System.out.println("고객명 : " + app.getUserName() + "\t\t연락처 : " + app.getUserPhone());
 			System.out.println("배송지 : " + adress + "\t발송일 : ");
 			System.out.println("장바구니 상품 목록 : ");
@@ -145,7 +145,7 @@ public class BookMarketService {
 			String phone = app.scan.next();
 			System.out.print("배송받을 고객의 배송지를 입력해주세요 ");
 			String adress = app.scan.next();
-			System.out.println("---------------배송 받을 고객 정보---------------");
+			System.out.println("----------------배송 받을 고객 정보-----------------");
 			System.out.println("고객명 : " + name + "\t\t연락처 : " + phone);
 			System.out.println("배송지 : " + adress + "\t발송일 : ");
 			System.out.println("장바구니 상품 목록 : ");
