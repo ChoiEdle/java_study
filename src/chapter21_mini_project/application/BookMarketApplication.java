@@ -60,7 +60,6 @@ public class BookMarketApplication {
 	}
 	
 	public void selectMenu() {
-		System.out.println("*************************************************");
 		System.out.print("메뉴 번호를 선택해주세요 ");
 		switch(scan.nextInt()) {
 			case MENUGUESTINFO :
