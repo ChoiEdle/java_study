@@ -3,35 +3,34 @@ package chapter21_mini_project.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import chapter21_mini_project.model.BookMarketBooksVo;
 import chapter21_mini_project.model.BookMarketCartVo;
 import db.DBConn;
 
 public class BookMarketCartRepository extends DBConn implements BookMarketRepositoryInterface<BookMarketCartVo> {
 	//Field
 	
-	
 	//Constructor
 	
 	//Method
-	public void addItem(String id) {
+	public void addItem(BookMarketBooksVo book) {
 		List<BookMarketCartVo> list = itemList();
-		BookMarketCartVo cart = findItem(id);
 		String sql = "";
 		if(list.size() == 0) {
 			sql = "insert into book_market_cart(bid, quantity, total, bdate) "
-					+ " values('" + id +"', 1 , " + cart.getPrice() + ", curdate())";
+					+ " values('" + book.getBid() +"', 1 , " + book.getPrice() + ", curdate())";
 			
 		} else {
 			for(int i=0 ; i<list.size() ; i++) {
-				if(list.get(i).getBid().equals(id)) {
+				if(list.get(i).getBid().equals(book.getBid())) {
 					sql = "update book_market_cart " +
 							" set quantity = " + (list.get(i).getQuantity() + 1) + " , total = "
-							+ ((list.get(i).getQuantity() + 1)*cart.getPrice())
+							+ ((list.get(i).getQuantity() + 1)*book.getPrice())
 							+ " where bid = '" + list.get(i).getBid() + "'";
 					break;
 				} else {
 					sql = "insert into book_market_cart(bid, quantity, total, bdate) "
-							+ " values('" + id +"', 1 , " + cart.getPrice() + ", curdate())";
+							+ " values('" + book.getBid() +"', 1 , " + book.getPrice() + ", curdate())";
 				}
 			}
 		}
@@ -56,10 +55,8 @@ public class BookMarketCartRepository extends DBConn implements BookMarketReposi
 	public List<BookMarketCartVo> itemList() {
 		List<BookMarketCartVo> list = new ArrayList<BookMarketCartVo>();
 		String sql = """
-				select c.bid, quantity, total, c.bdate, b.price 
-				from book_market_cart c 
-				inner join book_market_books b
-				on c.bid = b.bid
+				select bid, quantity, total, bdate
+				from book_market_cart 
 				""";
 		try {
 			getPreparedStatement(sql);
@@ -70,7 +67,6 @@ public class BookMarketCartRepository extends DBConn implements BookMarketReposi
 				cart.setQuantity(rs.getInt(2));
 				cart.setTotalPrice(rs.getInt(3));
 				cart.setBdate(rs.getString(4));
-				cart.setPrice(rs.getInt(5));
 				
 				list.add(cart);
 			}
@@ -101,7 +97,7 @@ public class BookMarketCartRepository extends DBConn implements BookMarketReposi
 			try {
 				getPreparedStatement(sql);
 				pstmt.setInt(1, no);
-				pstmt.setInt(2, (no*cart.getPrice()));
+				pstmt.setInt(2, (no*(cart.getTotalPrice()/cart.getQuantity())));
 				pstmt.setString(3, cart.getBid());
 				rows = pstmt.executeUpdate();
 			} catch (Exception e) {
@@ -125,19 +121,6 @@ public class BookMarketCartRepository extends DBConn implements BookMarketReposi
 	
 	public boolean login(String name, String phone) {
 		boolean result = false;
-		String sql = """
-				select name, phone from book_market_member where name = ? and phone = ?
-				""";
-		try {
-			getPreparedStatement(sql);
-			pstmt.setString(1, name);
-			pstmt.setString(2, phone);
-			rs = pstmt.executeQuery();
-			
-			result = rs.next();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return result;
 	}
 }

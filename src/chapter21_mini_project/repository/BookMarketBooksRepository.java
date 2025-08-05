@@ -51,16 +51,31 @@ public class BookMarketBooksRepository extends DBConn implements BookMarketRepos
 		return book;
 	}
 	
-	public void addItem(String id) {
+	public void addItem(BookMarketBooksVo book) {
 		
 	}
 	
 	public void clear() {
-		
+		String sql = "truncate book_market_books";
+		try {
+			getPreparedStatement(sql);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public int removeItem(String id) {
-		return 0;
+		int rows = 0;
+		String sql = "delete from book_market_books where bid = ?";
+		try {
+			getPreparedStatement(sql);
+			pstmt.setString(1, id);
+			rows = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rows;
 	}
 	
 	public int removeItemCount(String id, int no) {

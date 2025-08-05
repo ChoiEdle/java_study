@@ -5,16 +5,18 @@ import java.util.List;
 import chapter21_mini_project.application.BookMarketApplication;
 import chapter21_mini_project.model.BookMarketBooksVo;
 import chapter21_mini_project.model.BookMarketCartVo;
-import chapter21_mini_project.repository.BookMarketCartRepository;
+import chapter21_mini_project.model.BookMarketMemberVo;
 import chapter21_mini_project.repository.BookMarketBooksRepository;
+import chapter21_mini_project.repository.BookMarketCartRepository;
 import chapter21_mini_project.repository.BookMarketMemberRepository;
+import chapter21_mini_project.repository.BookMarketRepositoryInterface;
 
 public class BookMarketService {
 	//Field
 	BookMarketApplication app;
-	BookMarketCartRepository cartRepository;
-	BookMarketBooksRepository bookRepository;
-	BookMarketMemberRepository memberRepository;
+	BookMarketRepositoryInterface<BookMarketCartVo> cartRepository;
+	BookMarketRepositoryInterface<BookMarketBooksVo> bookRepository;
+	BookMarketRepositoryInterface<BookMarketMemberVo> memberRepository;
 	
 	
 	//Constructor
@@ -22,7 +24,7 @@ public class BookMarketService {
 		this.app = app;
 		cartRepository = new BookMarketCartRepository();
 		bookRepository = new BookMarketBooksRepository();
-		
+		memberRepository = new BookMarketMemberRepository();
 	}
 	
 	//Method
@@ -94,7 +96,7 @@ public class BookMarketService {
 			System.out.print("장바구니에 추가하겠습니까? Y | N");
 			String anser = app.scan.next();
 			if(anser.equals("Y")) {
-				cartRepository.addItem(scanId);
+				cartRepository.addItem(addBook);
 				System.out.println(scanId + " 도서가 장바구니에 추가되었습니다.");
 			} else if(anser.equals("N")) {
 				System.out.println("취소하셨습니다.");
@@ -187,7 +189,9 @@ public class BookMarketService {
 	}
 	
 	public boolean login(String name, String phone) {
-		boolean result = cartRepository.login(name, phone);
+//		BookMarketMemberVo member = memberRepository.findItem(name);
+//		boolean result = member.getPhone().equals(phone);
+		boolean result = memberRepository.login(name, phone);
 		return result;
 	}
 }
