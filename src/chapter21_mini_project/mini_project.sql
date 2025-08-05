@@ -57,4 +57,10 @@ alter table book_market_cart
 add constraint fk_book_market_cart_bid foreign key(bid)
 references book_market_books(bid);
 
+desc employee;
+desc book_market_cart;
+alter table book_market_cart
+add column bdate date;
+select * from book_market_cart;
+
 

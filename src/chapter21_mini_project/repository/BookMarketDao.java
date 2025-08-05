@@ -27,7 +27,6 @@ public class BookMarketDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	//Method
@@ -49,8 +48,7 @@ public class BookMarketDao {
 		}
 	}
 	
-	
-	
+	//
 	
 	public List<BookMarketBooksVo> bookItemList() {
 		List<BookMarketBooksVo> list = new ArrayList<BookMarketBooksVo>();
