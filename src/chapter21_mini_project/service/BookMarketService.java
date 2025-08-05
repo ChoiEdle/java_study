@@ -5,17 +5,23 @@ import java.util.List;
 import chapter21_mini_project.application.BookMarketApplication;
 import chapter21_mini_project.model.BookMarketBooksVo;
 import chapter21_mini_project.model.BookMarketCartVo;
-import chapter21_mini_project.repository.BookMarketDao;
+import chapter21_mini_project.repository.BookMarketCartRepository;
+import chapter21_mini_project.repository.BookMarketBooksRepository;
+import chapter21_mini_project.repository.BookMarketMemberRepository;
 
 public class BookMarketService {
 	//Field
 	BookMarketApplication app;
-	BookMarketDao repository;
+	BookMarketCartRepository cartRepository;
+	BookMarketBooksRepository bookRepository;
+	BookMarketMemberRepository memberRepository;
+	
 	
 	//Constructor
 	public BookMarketService(BookMarketApplication app) {
 		this.app = app;
-		repository = new BookMarketDao();
+		cartRepository = new BookMarketCartRepository();
+		bookRepository = new BookMarketBooksRepository();
 		
 	}
 	
@@ -30,7 +36,7 @@ public class BookMarketService {
 		String anser = app.scan.next();
 		if(anser.equals("Y")) {
 			System.out.println("장바구니에 모든 항목을 삭제했습니다.");
-			repository.cartClear();
+			cartRepository.clear();
 		} else if(anser.equals("N")) {
 			System.out.println("취소하셨습니다.");
 		} else {
@@ -39,7 +45,7 @@ public class BookMarketService {
 	}
 	
 	public void menuCartItemList() {
-		List<BookMarketCartVo> list = repository.cartItemList();
+		List<BookMarketCartVo> list = cartRepository.itemList();
 		System.out.println("------------------------------------------------");
 		System.out.println("도서ID\t\t|\t수량\t|\t합계");
 		list.forEach(cartList -> {
@@ -59,7 +65,7 @@ public class BookMarketService {
 	
 	public List<BookMarketBooksVo> menuBookItemList() {
 		System.out.println("------------------------------------------------");
-		List<BookMarketBooksVo> list = repository.bookItemList();
+		List<BookMarketBooksVo> list = bookRepository.itemList();
 		list.forEach(book -> {
 			System.out.print(book.getBid() +  " | ");
 			System.out.print(book.getTitle() +  " | ");
@@ -88,8 +94,8 @@ public class BookMarketService {
 			System.out.print("장바구니에 추가하겠습니까? Y | N");
 			String anser = app.scan.next();
 			if(anser.equals("Y")) {
-				repository.cartAddItem(addBook);
-				System.out.println(addBook.getBid() + " 도서가 장바구니에 추가되었습니다.");
+				cartRepository.addItem(scanId);
+				System.out.println(scanId + " 도서가 장바구니에 추가되었습니다.");
 			} else if(anser.equals("N")) {
 				System.out.println("취소하셨습니다.");
 			} else {
@@ -112,7 +118,7 @@ public class BookMarketService {
 		if(anser.equals("Y")) {
 			System.out.print("변경하실 수량은? ");
 			int scanNo = app.scan.nextInt();
-			rows = repository.cartRemoveItemCount(scanId, scanNo);
+			rows = cartRepository.removeItemCount(scanId, scanNo);
 			if(rows != 0) {
 				System.out.println(scanId + " 장바구니에서 도서의 수량이 수정되었습니다.");
 			} else {
@@ -134,7 +140,7 @@ public class BookMarketService {
 		System.out.print("장바구니의 항목을 삭제하겠습니까? Y | N");
 		String anser = app.scan.next();
 		if(anser.equals("Y")) {
-			rows = repository.cartRemoveItem(scanId);
+			rows = cartRepository.removeItem(scanId);
 			if(rows != 0) {
 				System.out.println(scanId + " 장바구니에서 도서가 삭제되었습니다.");
 			} else {
@@ -177,11 +183,11 @@ public class BookMarketService {
 	
 	public void menuExit() {
 		System.out.println("프로그램을 종료합니다.");
-		repository.close();
+		cartRepository.close();
 	}
 	
 	public boolean login(String name, String phone) {
-		boolean result = repository.login(name, phone);
+		boolean result = cartRepository.login(name, phone);
 		return result;
 	}
 }

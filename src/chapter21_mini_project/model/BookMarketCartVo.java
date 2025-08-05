@@ -4,12 +4,19 @@ public class BookMarketCartVo {
 	//Field
 	String Bid;
 	int quantity;
+	int price;
 	int totalPrice;
 	String bdate;
 	
 	//Constructor
 	
 	//Method
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	public String getBdate() {
 		return bdate;
 	}

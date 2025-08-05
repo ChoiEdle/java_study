@@ -63,4 +63,8 @@ alter table book_market_cart
 add column bdate date;
 select * from book_market_cart;
 
-
+select * from book_market_books;
+select c.bid, quantity, total, bdate, b.price 
+from book_market_cart c 
+inner join book_market_books b
+on c.bid = b.bid;
