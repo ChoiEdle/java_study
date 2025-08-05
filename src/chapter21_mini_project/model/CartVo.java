@@ -5,10 +5,17 @@ public class CartVo {
 	String Bid;
 	int quantity;
 	int totalPrice;
+	String bdate;
 	
 	//Constructor
 	
 	//Method
+	public String getBdate() {
+		return bdate;
+	}
+	public void setBdate(String bdate) {
+		this.bdate = bdate;
+	}
 	public String getBid() {
 		return Bid;
 	}

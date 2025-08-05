@@ -26,7 +26,7 @@ public class BookMarketService {
 	}
 	
 	public void menuCartItemList() {
-		List<CartVo> list = repository.cartFindAll();
+		List<CartVo> list = repository.cartItemList();
 		System.out.println("------------------------------------------------");
 		System.out.println("도서ID\t\t|\t수량\t|\t합계");
 		list.forEach(cartList -> {
@@ -49,7 +49,7 @@ public class BookMarketService {
 		String anser = app.scan.next();
 		if(anser.equals("Y")) {
 			System.out.println("장바구니에 모든 항목을 삭제했습니다.");
-			repository.deleteAll();
+			repository.cartClear();
 		} else if(anser.equals("N")) {
 			System.out.println("취소하셨습니다.");
 		} else {
@@ -58,7 +58,7 @@ public class BookMarketService {
 	}
 	
 	public void menuCartAddItem() {
-		List<BookVo> list = repository.bookFindAll();
+		List<BookVo> list = repository.bookItemList();
 		BookVo addBook = null;
 		list.forEach(book -> {
 			System.out.print(book.getBid() +  " | ");
@@ -81,7 +81,7 @@ public class BookMarketService {
 			System.out.print("장바구니에 추가하겠습니까? Y | N");
 			String anser = app.scan.next();
 			if(anser.equals("Y")) {
-				repository.addCart(addBook);
+				repository.cartAddItem(addBook);
 				System.out.println(addBook.getBid() + " 도서가 장바구니에 추가되었습니다.");
 			} else if(anser.equals("N")) {
 				System.out.println("취소하셨습니다.");
@@ -102,8 +102,7 @@ public class BookMarketService {
 		if(anser.equals("Y")) {
 			System.out.print("변경하실 수량은? ");
 			int scanNo = app.scan.nextInt();
-			repository.upDown(scanId, scanNo);
-			System.out.println(scanId + " 장바구니에서 도서의 수량이 수정되었습니다.");
+			repository.cartRemoveItemCount(scanId, scanNo);
 		} else if(anser.equals("N")) {
 			System.out.println("취소하셨습니다.");
 		} else {
@@ -118,7 +117,7 @@ public class BookMarketService {
 		System.out.print("장바구니의 항목을 삭제하겠습니까? Y | N");
 		String anser = app.scan.next();
 		if(anser.equals("Y")) {
-			repository.deleteCart(scanId);
+			repository.cartRemoveItem(scanId);
 			System.out.println(scanId + " 장바구니에서 도서가 삭제되었습니다.");
 		} else if(anser.equals("N")) {
 			System.out.println("취소하셨습니다.");
@@ -135,7 +134,7 @@ public class BookMarketService {
 			String adress = app.scan.next();
 			System.out.println("----------------배송 받을 고객 정보-----------------");
 			System.out.println("고객명 : " + app.getUserName() + "\t\t연락처 : " + app.getUserPhone());
-			System.out.println("배송지 : " + adress + "\t발송일 : ");
+			System.out.println("배송지 : " + adress + "\t발송일 : " + app.now);
 			System.out.println("장바구니 상품 목록 : ");
 			menuCartItemList();
 		} else if(anser.equals("N")) {
@@ -147,7 +146,7 @@ public class BookMarketService {
 			String adress = app.scan.next();
 			System.out.println("----------------배송 받을 고객 정보-----------------");
 			System.out.println("고객명 : " + name + "\t\t연락처 : " + phone);
-			System.out.println("배송지 : " + adress + "\t발송일 : ");
+			System.out.println("배송지 : " + adress + "\t발송일 : " + app.now);
 			System.out.println("장바구니 상품 목록 : ");
 			menuCartItemList();
 		} else {

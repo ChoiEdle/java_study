@@ -1,5 +1,6 @@
 package chapter21_mini_project.application;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import chapter21_mini_project.service.BookMarketService;
@@ -14,6 +15,7 @@ public class BookMarketApplication {
 	public static final int REMOVEITEM = 6;
 	public static final int BILL = 7;
 	public static final int EXIT = 8;
+	public LocalDate now = LocalDate.now();
 	public Scanner scan;
 	private String userName;
 	private String userPhone;

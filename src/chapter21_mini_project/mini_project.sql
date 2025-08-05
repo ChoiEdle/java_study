@@ -49,3 +49,12 @@ select * from book_market_member;
 insert into book_market_member (name, phone)
 values('홍길동','010-1111-1111');
 
+use hrdb2019;
+select database();
+
+desc book_market_cart;
+alter table book_market_cart
+add constraint fk_book_market_cart_bid foreign key(bid)
+references book_market_books(bid);
+
+
