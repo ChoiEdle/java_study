@@ -82,8 +82,8 @@ public class BookMarketBooksRepository extends DBConn implements BookMarketRepos
 		return 0;
 	}
 	
-	public boolean login(String name, String phone) {
-		return false;
-	}
+//	public boolean login(String name, String phone) {
+//		return false;
+//	}
 	
 }

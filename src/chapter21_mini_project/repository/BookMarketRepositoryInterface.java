@@ -11,6 +11,6 @@ public interface BookMarketRepositoryInterface<T> {
 	int removeItem(String id);
 	int removeItemCount(String id, int no);
 	T findItem(String id);
-	boolean login(String name, String phone);
 	void close();
+//	boolean login(String name, String phone);
 }

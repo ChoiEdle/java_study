@@ -119,8 +119,8 @@ public class BookMarketCartRepository extends DBConn implements BookMarketReposi
 		return cart;
 	}
 	
-	public boolean login(String name, String phone) {
-		boolean result = false;
-		return result;
-	}
+//	public boolean login(String name, String phone) {
+//		boolean result = false;
+//		return result;
+//	}
 }

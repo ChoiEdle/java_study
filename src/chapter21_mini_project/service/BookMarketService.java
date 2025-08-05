@@ -5,9 +5,9 @@ import java.util.List;
 import chapter21_mini_project.application.BookMarketApplication;
 import chapter21_mini_project.model.BookMarketBooksVo;
 import chapter21_mini_project.model.BookMarketCartVo;
-import chapter21_mini_project.model.BookMarketMemberVo;
 import chapter21_mini_project.repository.BookMarketBooksRepository;
 import chapter21_mini_project.repository.BookMarketCartRepository;
+import chapter21_mini_project.repository.BookMarketLoginInterface;
 import chapter21_mini_project.repository.BookMarketMemberRepository;
 import chapter21_mini_project.repository.BookMarketRepositoryInterface;
 
@@ -16,7 +16,7 @@ public class BookMarketService {
 	BookMarketApplication app;
 	BookMarketRepositoryInterface<BookMarketCartVo> cartRepository;
 	BookMarketRepositoryInterface<BookMarketBooksVo> bookRepository;
-	BookMarketRepositoryInterface<BookMarketMemberVo> memberRepository;
+	BookMarketLoginInterface memberRepository;
 	
 	
 	//Constructor

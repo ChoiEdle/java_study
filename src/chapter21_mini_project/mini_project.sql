@@ -68,3 +68,8 @@ select c.bid, quantity, total, c.bdate, b.price
 from book_market_cart c 
 inner join book_market_books b
 on c.bid = b.bid;
+
+update book_market_books
+set uid = 'IT전문서'
+where bid = 'ISBN1235';
+
