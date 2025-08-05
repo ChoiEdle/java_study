@@ -1,6 +1,6 @@
 package chapter21_mini_project.model;
 
-public class BookVo {
+public class BookMarketBooksVo {
 	//Field
 	String bid;
 	String title;

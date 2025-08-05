@@ -1,6 +1,6 @@
 package chapter21_mini_project.model;
 
-public class CartVo {
+public class BookMarketCartVo {
 	//Field
 	String Bid;
 	int quantity;

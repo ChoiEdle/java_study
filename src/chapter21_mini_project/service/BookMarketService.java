@@ -3,8 +3,8 @@ package chapter21_mini_project.service;
 import java.util.List;
 
 import chapter21_mini_project.application.BookMarketApplication;
-import chapter21_mini_project.model.BookVo;
-import chapter21_mini_project.model.CartVo;
+import chapter21_mini_project.model.BookMarketBooksVo;
+import chapter21_mini_project.model.BookMarketCartVo;
 import chapter21_mini_project.repository.BookMarketDao;
 
 public class BookMarketService {
@@ -25,8 +25,21 @@ public class BookMarketService {
 		System.out.println("이름 " + app.getUserName() + "\t연락처 " + app.getUserPhone());
 	}
 	
+	public void menuCartClear() {
+		System.out.print("장바구니에 모든 항목을 삭제하겠습니까? Y | N");
+		String anser = app.scan.next();
+		if(anser.equals("Y")) {
+			System.out.println("장바구니에 모든 항목을 삭제했습니다.");
+			repository.cartClear();
+		} else if(anser.equals("N")) {
+			System.out.println("취소하셨습니다.");
+		} else {
+			System.out.println("잘못 누르셨습니다.");
+		}
+	}
+	
 	public void menuCartItemList() {
-		List<CartVo> list = repository.cartItemList();
+		List<BookMarketCartVo> list = repository.cartItemList();
 		System.out.println("------------------------------------------------");
 		System.out.println("도서ID\t\t|\t수량\t|\t합계");
 		list.forEach(cartList -> {
@@ -44,22 +57,9 @@ public class BookMarketService {
 		System.out.println("------------------------------------------------");
 	}
 	
-	public void menuCartClear() {
-		System.out.print("장바구니에 모든 항목을 삭제하겠습니까? Y | N");
-		String anser = app.scan.next();
-		if(anser.equals("Y")) {
-			System.out.println("장바구니에 모든 항목을 삭제했습니다.");
-			repository.cartClear();
-		} else if(anser.equals("N")) {
-			System.out.println("취소하셨습니다.");
-		} else {
-			System.out.println("잘못 누르셨습니다.");
-		}
-	}
-	
-	public void menuCartAddItem() {
-		List<BookVo> list = repository.bookItemList();
-		BookVo addBook = null;
+	public List<BookMarketBooksVo> menuBookItemList() {
+		System.out.println("------------------------------------------------");
+		List<BookMarketBooksVo> list = repository.bookItemList();
 		list.forEach(book -> {
 			System.out.print(book.getBid() +  " | ");
 			System.out.print(book.getTitle() +  " | ");
@@ -69,6 +69,13 @@ public class BookMarketService {
 			System.out.print(book.getUid() +  " | ");
 			System.out.println(book.getBdate() +  " | ");
 		});
+		System.out.println("------------------------------------------------");
+		return list;
+	}
+	
+	public void menuCartAddItem() {
+		List<BookMarketBooksVo> list = menuBookItemList();
+		BookMarketBooksVo addBook = null;
 		System.out.print("장바구니에 추가할 도서의 ID를 입력하세요 : ");
 		String scanId = app.scan.next();
 		for(int i=0 ; i < list.size() ; i++) {
@@ -88,6 +95,8 @@ public class BookMarketService {
 			} else {
 				System.out.println("잘못 누르셨습니다.");
 			}
+		} else {
+			System.out.println(scanId + " 해당 도서의 ID는 없는 ID입니다.");
 		}
 		
 	}
@@ -96,29 +105,41 @@ public class BookMarketService {
 		menuCartItemList();
 		System.out.print("장바구니에서 수량을 변경할 도서의 ID를 입력하세요 : ");
 		String scanId = app.scan.next();
+		int rows = 0;
 		
 		System.out.print("장바구니의 수량을 변경하겠습니까? Y | N");
 		String anser = app.scan.next();
 		if(anser.equals("Y")) {
 			System.out.print("변경하실 수량은? ");
 			int scanNo = app.scan.nextInt();
-			repository.cartRemoveItemCount(scanId, scanNo);
+			rows = repository.cartRemoveItemCount(scanId, scanNo);
+			if(rows != 0) {
+				System.out.println(scanId + " 장바구니에서 도서의 수량이 수정되었습니다.");
+			} else {
+				System.out.println(scanId + "는 장바구니에 없습니다.");
+			}
 		} else if(anser.equals("N")) {
 			System.out.println("취소하셨습니다.");
 		} else {
 			System.out.println("잘못 누르셨습니다.");
 		}
+
 	}
 	
 	public void menuCartRemoveItem() {
 		menuCartItemList();
+		int rows = 0;
 		System.out.print("장바구니에서 삭제할 도서의 ID를 입력하세요 : ");
 		String scanId = app.scan.next();
 		System.out.print("장바구니의 항목을 삭제하겠습니까? Y | N");
 		String anser = app.scan.next();
 		if(anser.equals("Y")) {
-			repository.cartRemoveItem(scanId);
-			System.out.println(scanId + " 장바구니에서 도서가 삭제되었습니다.");
+			rows = repository.cartRemoveItem(scanId);
+			if(rows != 0) {
+				System.out.println(scanId + " 장바구니에서 도서가 삭제되었습니다.");
+			} else {
+				System.out.println(scanId + "는 장바구니에 없습니다.");
+			}
 		} else if(anser.equals("N")) {
 			System.out.println("취소하셨습니다.");
 		} else {
