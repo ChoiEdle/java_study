@@ -160,7 +160,8 @@ public class BookMarketService {
 		String anser = app.scan.next();
 		if(anser.equals("Y")) {
 			System.out.print("배송지를 입력해주세요 ");
-			String adress = app.scan.next();
+			app.scan.nextLine();
+			String adress = app.scan.nextLine();
 			System.out.println("----------------배송 받을 고객 정보-----------------");
 			System.out.println("고객명 : " + app.getUserName() + "\t\t연락처 : " + app.getUserPhone());
 			System.out.println("배송지 : " + adress + "\t발송일 : " + app.now);
@@ -172,7 +173,8 @@ public class BookMarketService {
 			System.out.print("배송받을 고객의 연락처를 입력하세요 ");
 			String phone = app.scan.next();
 			System.out.print("배송받을 고객의 배송지를 입력해주세요 ");
-			String adress = app.scan.next();
+			app.scan.nextLine();
+			String adress = app.scan.nextLine();
 			System.out.println("----------------배송 받을 고객 정보-----------------");
 			System.out.println("고객명 : " + name + "\t\t연락처 : " + phone);
 			System.out.println("배송지 : " + adress + "\t발송일 : " + app.now);
@@ -186,6 +188,8 @@ public class BookMarketService {
 	public void menuExit() {
 		System.out.println("프로그램을 종료합니다.");
 		cartRepository.close();
+		bookRepository.close();
+		memberRepository.close();
 	}
 	
 	public boolean login(String name, String phone) {
